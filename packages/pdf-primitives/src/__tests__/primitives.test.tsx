@@ -4,57 +4,55 @@ import React from "react";
 afterEach(cleanup);
 
 // Mock @react-pdf/renderer — its components don't render in jsdom
-vi.mock<typeof import("@react-pdf/renderer")>(
-	import("@react-pdf/renderer"),
-	() => {
-		const make = (name: string) =>
-			React.forwardRef(({ style, wrap, render, ...rest }: any, ref: any) =>
-				React.createElement("div", {
-					ref,
-					"data-testid": name,
-					"data-style": style ? JSON.stringify(style) : undefined,
-					"data-wrap": wrap !== undefined ? String(wrap) : undefined,
-					"data-render": render
-						? JSON.stringify(
-								render({
-									pageNumber: 3,
-									totalPages: 10,
-									subPageNumber: 1,
-									subPageTotalPages: 1,
-								}),
-							)
-						: undefined,
-					...rest,
-				}),
-			);
+vi.mock(import("@react-pdf/renderer"), () => {
+	const make = (name: string) =>
+		React.forwardRef(({ style, wrap, render, ...rest }: any, ref: any) =>
+			React.createElement("div", {
+				ref,
+				"data-testid": name,
+				"data-style": style ? JSON.stringify(style) : undefined,
+				"data-wrap": wrap !== undefined ? String(wrap) : undefined,
+				"data-render": render
+					? JSON.stringify(
+							render({
+								pageNumber: 3,
+								totalPages: 10,
+								subPageNumber: 1,
+								subPageTotalPages: 1,
+							}),
+						)
+					: undefined,
+				...rest,
+			}),
+		);
 
-		return {
-			Canvas: make("rp-canvas"),
-			Circle: make("rp-circle"),
-			ClipPath: make("rp-clippath"),
-			Defs: make("rp-defs"),
-			Document: make("rp-document"),
-			Ellipse: make("rp-ellipse"),
-			G: make("rp-g"),
-			Image: make("rp-image"),
-			Line: make("rp-line"),
-			LinearGradient: make("rp-lineargradient"),
-			Link: make("rp-link"),
-			Note: make("rp-note"),
-			Page: make("rp-page"),
-			Path: make("rp-path"),
-			Polygon: make("rp-polygon"),
-			Polyline: make("rp-polyline"),
-			RadialGradient: make("rp-radialgradient"),
-			Rect: make("rp-rect"),
-			Stop: make("rp-stop"),
-			Svg: make("rp-svg"),
-			Text: make("rp-text"),
-			Tspan: make("rp-tspan"),
-			View: make("rp-view"),
-		};
-	},
-);
+	return {
+		Canvas: make("rp-canvas"),
+		Circle: make("rp-circle"),
+		ClipPath: make("rp-clippath"),
+		Defs: make("rp-defs"),
+		Document: make("rp-document"),
+		Ellipse: make("rp-ellipse"),
+		G: make("rp-g"),
+		Image: make("rp-image"),
+		Line: make("rp-line"),
+		LinearGradient: make("rp-lineargradient"),
+		Link: make("rp-link"),
+		Note: make("rp-note"),
+		Page: make("rp-page"),
+		Path: make("rp-path"),
+		Polygon: make("rp-polygon"),
+		Polyline: make("rp-polyline"),
+		RadialGradient: make("rp-radialgradient"),
+		Rect: make("rp-rect"),
+		Stop: make("rp-stop"),
+		Svg: make("rp-svg"),
+		Text: make("rp-text"),
+		Tspan: make("rp-tspan"),
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		View: make("rp-view"),
+	} as any;
+});
 
 import {
 	Block,
@@ -222,7 +220,9 @@ describe(Document, () => {
 
 describe(Canvas, () => {
 	it("renders with className", () => {
-		const { getByTestId } = render(<Canvas className="w-full h-full" />);
+		const { getByTestId } = render(
+			<Canvas className="w-full h-full" paint={() => null} />,
+		);
 		const style = getStyle(getByTestId("rp-canvas"));
 		expect(style).toStrictEqual([{ height: "100%", width: "100%" }]);
 	});

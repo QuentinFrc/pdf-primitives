@@ -1,8 +1,9 @@
-vi.mock<typeof import("@react-pdf/renderer")>(
+vi.mock(
 	import("@react-pdf/renderer"),
-	() => ({
-		Font: { register: vi.fn() },
-	}),
+	() =>
+		({
+			Font: { register: vi.fn() },
+		}) as any,
 );
 
 import { Font } from "@react-pdf/renderer";
