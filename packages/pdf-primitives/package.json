@@ -9,7 +9,7 @@
     "react-pdf",
     "tailwind"
   ],
-  "homepage": "https://github.com/QuentinFrc/pdf-primitives",
+  "homepage": "https://pdf-primitives.vercel.app",
   "bugs": "https://github.com/QuentinFrc/pdf-primitives/issues",
   "license": "MIT",
   "author": "Quentin",
