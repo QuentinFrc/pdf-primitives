@@ -1,0 +1,14 @@
+{
+  "title": "Components",
+  "pages": [
+    "block",
+    "text",
+    "page",
+    "image",
+    "link",
+    "document",
+    "canvas",
+    "note",
+    "page-number"
+  ]
+}

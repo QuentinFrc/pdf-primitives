@@ -1,0 +1,84 @@
+---
+title: Re-exports
+description: PDF generation utilities and viewer components.
+---
+
+These utilities are included in @pdf-primitives/react for convenience so you can import everything from a single package.
+
+```ts
+import { Font, StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@pdf-primitives/react";
+```
+
+## Font
+
+Register custom fonts for use in your PDF documents.
+
+```ts
+Font.register({
+  family: "Inter",
+  src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjQ.woff2",
+});
+```
+
+## StyleSheet
+
+Create typed style objects. Useful when you need styles outside of the className system.
+
+```ts
+const styles = StyleSheet.create({
+  watermark: { position: "absolute", opacity: 0.1, fontSize: 72, transform: "rotate(-45deg)" },
+});
+```
+
+## PDFViewer
+
+Renders the PDF in an iframe for browser preview.
+
+```tsx
+<PDFViewer style={{ width: "100%", height: "100vh" }}>
+  <MyDocument />
+</PDFViewer>
+```
+
+## PDFDownloadLink
+
+Renders a download link that generates the PDF on click.
+
+```tsx
+<PDFDownloadLink document={<MyDocument />} fileName="report.pdf">
+  {({ loading }) => (loading ? "Generating..." : "Download PDF")}
+</PDFDownloadLink>
+```
+
+## BlobProvider
+
+Provides the PDF as a blob for custom download/preview logic.
+
+```tsx
+<BlobProvider document={<MyDocument />}>
+  {({ blob, url, loading }) => (
+    loading ? <span>Loading...</span> : <a href={url}>Download</a>
+  )}
+</BlobProvider>
+```
+
+## usePDF
+
+Hook for imperative PDF generation.
+
+```tsx
+const [instance, update] = usePDF({ document: <MyDocument /> });
+// instance.url — blob URL
+// instance.blob — Blob object
+// instance.loading — boolean
+// instance.error — Error | null
+```
+
+## pdf
+
+Generate a PDF blob outside of React (e.g. in a server endpoint or script).
+
+```ts
+const blob = await pdf(<MyDocument />).toBlob();
+const buffer = await pdf(<MyDocument />).toBuffer();
+```

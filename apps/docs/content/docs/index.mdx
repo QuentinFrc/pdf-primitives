@@ -1,0 +1,127 @@
+---
+title: Getting Started
+description: Tailwind-style className support for building PDF documents with React.
+---
+
+## What is @pdf-primitives/react?
+
+`@pdf-primitives/react` provides React components for building PDF documents, with a `className` prop that accepts Tailwind-style utility classes.
+
+## Installation
+
+```bash
+npm install @pdf-primitives/react react
+```
+
+### Exclude from Tailwind source detection
+
+@pdf-primitives/react uses the same class name conventions as Tailwind CSS but has its own independent styling engine. If your app uses Tailwind CSS, you should exclude your PDF files from Tailwind's content sources to avoid generating unnecessary CSS classes.
+
+In your `tailwind.config` (or `@source` directive in CSS), exclude the files that use @pdf-primitives/react:
+
+```ts title="tailwind.config.ts"
+export default {
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "!./src/**/*.pdf.tsx",  // exclude PDF template files
+  ],
+};
+```
+
+Or with Tailwind v4's CSS `@source` directive:
+
+```css title="app.css"
+@source not "../src/pdf";
+```
+
+The exact pattern depends on how you organize your PDF files. The key is to keep them out of Tailwind's source scanning.
+
+## Quick Start
+
+```tsx
+import { Document, Page, Block, Text, Tailwind, PDFViewer } from "@pdf-primitives/react";
+
+function MyDocument() {
+  return (
+    <Tailwind>
+      <Document>
+        <Page size="A4" className="p-12 bg-white">
+          <Block className="flex flex-col gap-4">
+            <Text className="text-3xl font-bold text-gray-900">
+              Invoice #001
+            </Text>
+            <Block className="flex flex-row justify-between border-b border-gray-200 pb-4">
+              <Text className="text-sm text-muted-foreground">Date: 2025-01-15</Text>
+              <Text className="text-sm text-muted-foreground">Due: 2025-02-15</Text>
+            </Block>
+            <Block className="flex flex-row justify-between bg-gray-50 p-4 rounded-lg">
+              <Text className="text-base">Web Development</Text>
+              <Text className="text-base font-semibold">$2,400.00</Text>
+            </Block>
+          </Block>
+        </Page>
+      </Document>
+    </Tailwind>
+  );
+}
+
+function App() {
+  return (
+    <PDFViewer style={{ width: "100%", height: "100vh" }}>
+      <MyDocument />
+    </PDFViewer>
+  );
+}
+```
+
+## Key Concepts
+
+### className prop
+
+Every layout component (`Block`, `Text`, `Page`, `Image`, `Link`, `Canvas`, `Note`) accepts a `className` prop. Classes are parsed at render time and converted to style objects.
+
+```tsx
+<Block className="p-4 bg-white rounded-lg border border-gray-200" />
+```
+
+You can combine `className` with `style` — inline styles are applied after class styles:
+
+```tsx
+<Block className="p-4" style={{ backgroundColor: "#custom" }} />
+```
+
+### Tailwind Provider
+
+Wrap your document tree in `<Tailwind>` to use the default theme, or pass a custom `theme` prop to override colors, spacing, font sizes, and more. See [Theming](/docs/theming) for details.
+
+```tsx
+<Tailwind theme={{ "--color-brand": "#0073e6" }}>
+  <Document>...</Document>
+</Tailwind>
+```
+
+### tw engine
+
+Under the hood, a lightweight Tailwind-to-style parser converts class strings to style objects. It supports the most common utility classes — layout, spacing, typography, colors, borders, transforms, and more. See [Utility Classes](/docs/utility-classes) for the full reference.
+
+You can also use the engine standalone:
+
+```ts
+import { createTw } from "@pdf-primitives/react";
+
+const tw = createTw({ "--color-brand": "#0073e6" });
+const styles = tw("p-4 bg-brand text-white font-bold");
+// → { paddingTop: 12, paddingRight: 12, ..., backgroundColor: "#0073e6", color: "#ffffff", fontWeight: 700 }
+```
+
+### Units — pt, not rem
+
+In a standard web app, Tailwind uses `rem` as the base unit (1rem = 16px). PDF documents use a different unit: **points (pt)**, where 1in = 72pt.
+
+@pdf-primitives/react automatically converts the Tailwind scale to points:
+
+- 1 Tailwind unit = 4px = **3pt**
+- `p-4` → 12pt padding (not 1rem)
+- `text-base` → 12pt font size (equivalent to 16px on web)
+
+This means the same class names produce visually similar results, but the underlying values are different. See [Utility Classes](/docs/utility-classes) for the full scale reference.

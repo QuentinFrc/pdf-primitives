@@ -1,0 +1,17 @@
+{
+  "title": "Documentation",
+  "root": true,
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "---Components---",
+    "...components",
+    "---Styling---",
+    "utility-classes",
+    "theming",
+    "---Utilities---",
+    "helpers",
+    "svg",
+    "re-exports"
+  ]
+}
