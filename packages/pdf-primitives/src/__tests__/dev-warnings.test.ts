@@ -1,5 +1,3 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-
 describe("dev warnings for unknown classes", () => {
   const originalEnv = process.env.NODE_ENV;
 
@@ -32,7 +30,7 @@ describe("dev warnings for unknown classes", () => {
     const calls = (console.warn as ReturnType<typeof vi.fn>).mock.calls.filter(
       (c) => typeof c[0] === "string" && c[0].includes("another-unknown-abc")
     );
-    expect(calls.length).toBe(1);
+    expect(calls).toHaveLength(1);
   });
 
   it("does not warn in production", async () => {
@@ -43,6 +41,6 @@ describe("dev warnings for unknown classes", () => {
     const calls = (console.warn as ReturnType<typeof vi.fn>).mock.calls.filter(
       (c) => typeof c[0] === "string" && c[0].includes("prod-unknown-class-xyz")
     );
-    expect(calls.length).toBe(0);
+    expect(calls).toHaveLength(0);
   });
 });

@@ -64,7 +64,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
-    "lint": "oxlint ."
+    "lint": "oxlint src --ignore-pattern 'src/__tests__'"
   },
   "dependencies": {
     "@react-pdf/renderer": ">=4"

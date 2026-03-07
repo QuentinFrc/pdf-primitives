@@ -4,7 +4,6 @@
 // are re-exported as-is — they use SVGPresentationAttributes which are
 // set via props (fill, stroke, etc.), not CSS classes.
 
-import React from "react";
 import {
   Svg as RPSvg,
   G as RPG,
@@ -22,21 +21,25 @@ import {
   Stop,
   LinearGradient,
   RadialGradient,
-  type SVGProps,
-  type GProps,
-  type SVGTextProps,
 } from "@react-pdf/renderer";
+import type { SVGProps, GProps, SVGTextProps } from "@react-pdf/renderer";
+import React from "react";
+
 import { useTw } from "./tailwind";
 
 // ─── Helper: merge className (tw) + style ────────────────────────────────────
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function useStyles(className?: string, style?: object | object[]): any {
+const useStyles = (className?: string, style?: object | object[]): any => {
   const tw = useTw();
   const twStyle = className ? tw(className) : undefined;
-  const styleArr = Array.isArray(style) ? style : style ? [style] : [];
-  return twStyle ? [twStyle, ...styleArr] : styleArr.length ? styleArr : undefined;
-}
+  const styleArr = Array.isArray(style) ? style : (style ? [style] : []);
+  return twStyle
+    ? [twStyle, ...styleArr]
+    : (styleArr.length
+      ? styleArr
+      : undefined);
+};
 
 // ─── Svg ─────────────────────────────────────────────────────────────────────
 
@@ -46,10 +49,10 @@ export interface PDFSvgProps extends Omit<SVGProps, "style"> {
   style?: object | object[];
 }
 
-export function Svg({ className, style, ...props }: PDFSvgProps) {
+export const Svg = ({ className, style, ...props }: PDFSvgProps) => {
   const merged = useStyles(className, style);
   return <RPSvg style={merged} {...props} />;
-}
+};
 
 // ─── G (Group) ───────────────────────────────────────────────────────────────
 
@@ -59,10 +62,10 @@ export interface PDFGProps extends Omit<GProps, "style"> {
   style?: object | object[];
 }
 
-export function G({ className, style, ...props }: PDFGProps) {
+export const G = ({ className, style, ...props }: PDFGProps) => {
   const merged = useStyles(className, style);
   return <RPG style={merged} {...props} />;
-}
+};
 
 // ─── SvgText ─────────────────────────────────────────────────────────────────
 
@@ -72,14 +75,25 @@ export interface PDFSvgTextProps extends Omit<SVGTextProps, "style"> {
   style?: object | object[];
 }
 
-export function SvgText({ className, style, ...props }: PDFSvgTextProps) {
+export const SvgText = ({ className, style, ...props }: PDFSvgTextProps) => {
   const merged = useStyles(className, style);
   return <RPSvgText style={merged} {...props} />;
-}
+};
 
 // ─── Shape & gradient re-exports (no className — use SVG props directly) ────
 
 export {
-  Path, Rect, Circle, Ellipse, Line, Polyline, Polygon,
-  Tspan, Defs, ClipPath, Stop, LinearGradient, RadialGradient,
+  Path,
+  Rect,
+  Circle,
+  Ellipse,
+  Line,
+  Polyline,
+  Polygon,
+  Tspan,
+  Defs,
+  ClipPath,
+  Stop,
+  LinearGradient,
+  RadialGradient,
 };

@@ -11,7 +11,16 @@ npm install pdf-primitives @react-pdf/renderer react
 ## Usage
 
 ```tsx
-import { Document, Page, Block, Text, Image, Link, Tailwind, cn } from "pdf-primitives";
+import {
+  Document,
+  Page,
+  Block,
+  Text,
+  Image,
+  Link,
+  Tailwind,
+  cn,
+} from "pdf-primitives";
 
 function MyPDF() {
   return (
@@ -47,17 +56,17 @@ tw("p-4 bg-brand text-white");
 
 ### Components
 
-| Component | Description |
-|-----------|-------------|
-| `Block` | Styled `View` — the primary layout primitive |
-| `View` | Deprecated alias for `Block` |
-| `Text` | Styled text |
-| `Page` | Styled page |
-| `Image` | Styled image |
-| `Link` | Styled hyperlink |
-| `Document` | Pass-through document wrapper |
-| `Canvas` | Styled canvas with `paint` callback |
-| `Note` | Styled PDF annotation |
+| Component  | Description                                  |
+| ---------- | -------------------------------------------- |
+| `Block`    | Styled `View` — the primary layout primitive |
+| `View`     | Deprecated alias for `Block`                 |
+| `Text`     | Styled text                                  |
+| `Page`     | Styled page                                  |
+| `Image`    | Styled image                                 |
+| `Link`     | Styled hyperlink                             |
+| `Document` | Pass-through document wrapper                |
+| `Canvas`   | Styled canvas with `paint` callback          |
+| `Note`     | Styled PDF annotation                        |
 
 ### Re-exports from @react-pdf/renderer
 
@@ -78,60 +87,77 @@ tw("p-4 bg-brand text-white");
 ## Supported Utility Classes
 
 ### Layout
+
 `flex`, `hidden`, `flex-row`, `flex-col`, `flex-wrap`, `flex-nowrap`, `flex-1`, `flex-auto`, `flex-initial`, `flex-none`, `grow`, `grow-0`, `shrink`, `shrink-0`
 
 ### Alignment
+
 `items-{start,end,center,baseline,stretch}`, `self-{auto,start,end,center,stretch,baseline}`, `justify-{start,end,center,between,around,evenly}`, `content-{start,end,center,between,around,stretch}`
 
 ### Spacing
+
 `p-{n}`, `px-{n}`, `py-{n}`, `pt-{n}`, `pr-{n}`, `pb-{n}`, `pl-{n}`, `m-{n}`, `mx-{n}`, `my-{n}`, `mt-{n}`, `mr-{n}`, `mb-{n}`, `ml-{n}`, `gap-{n}`, `gap-x-{n}`, `gap-y-{n}`
 
 Negative prefixes: `-mt-2`, `-ml-4`, etc.
 
 ### Sizing
+
 `w-{n}`, `h-{n}`, `min-w-{n}`, `max-w-{n}`, `min-h-{n}`, `max-h-{n}`, `w-full`, `w-auto`, `h-full`, `h-auto`
 
 Fractions: `w-1/2`, `w-2/3`, `h-1/4`, etc.
 
 ### Flex-basis
+
 `basis-{n}`, `basis-auto`, `basis-full`, `basis-1/2`, etc.
 
 ### Order
+
 `order-{1-12}`, `order-first`, `order-last`, `order-none`
 
 ### Aspect Ratio
+
 `aspect-square`, `aspect-video`, `aspect-auto`, `aspect-[4/3]`
 
 ### Position
+
 `relative`, `absolute`, `top-{n}`, `right-{n}`, `bottom-{n}`, `left-{n}`, `z-{n}`
 
 ### Typography
+
 `text-{size}`, `text-{color}`, `font-{weight}`, `italic`, `not-italic`, `text-left`, `text-center`, `text-right`, `text-justify`, `uppercase`, `lowercase`, `capitalize`, `normal-case`, `leading-{n}`, `tracking-{n}`, `line-clamp-{n}`
 
 ### Text Decoration
+
 `underline`, `line-through`, `no-underline`, `decoration-{color}`, `decoration-{solid,dashed,dotted,double,wavy}`, `indent-{n}`
 
 ### Borders
+
 `border`, `border-{n}`, `border-{t,r,b,l}`, `border-{color}`, `border-{solid,dashed,dotted}`, `rounded`, `rounded-{size}`, `rounded-{side}-{size}`
 
 ### Colors
+
 `bg-{color}`, `text-{color}`, `border-{color}`, `decoration-{color}`
 
 Alpha modifier: `bg-red-500/50`, `text-black/25`
 
 ### Opacity
+
 `opacity-{0-100}`
 
 ### Overflow
+
 `overflow-hidden`, `overflow-visible`
 
 ### Object Fit
+
 `object-{contain,cover,fill,none,scale-down}`, `object-{bottom,center,left,right,top}`
 
 ### Transforms
+
 `rotate-{n}`, `scale-{n}`, `scale-x-{n}`, `scale-y-{n}`, `translate-x-{n}`, `translate-y-{n}`
 
 ### Arbitrary Values
+
 `w-[210mm]`, `h-[297mm]`, `p-[1in]`, `w-[50vw]`, `text-[14]`, `z-[99]`, `aspect-[4/3]`
 
 ## Custom Theme

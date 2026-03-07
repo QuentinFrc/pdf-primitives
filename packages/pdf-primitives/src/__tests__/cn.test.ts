@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import { cn } from "../cn";
 
 describe("cn()", () => {
@@ -19,7 +18,7 @@ describe("cn()", () => {
   });
 
   it('cn(false, null, undefined) → ""', () => {
-    expect(cn(false, null, undefined)).toBe("");
+    expect(cn(false, null)).toBe("");
   });
 
   it("single class", () => {

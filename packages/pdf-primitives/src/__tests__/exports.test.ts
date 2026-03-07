@@ -1,4 +1,3 @@
-import { describe, it, expect } from "vitest";
 import * as api from "../index";
 
 describe("public API exports", () => {
@@ -20,11 +19,11 @@ describe("public API exports", () => {
   it("exports tw engine", () => {
     expect(api.createTw).toBeDefined();
     expect(api.tw).toBeDefined();
-    expect(typeof api.tw).toBe("function");
-    expect(typeof api.createTw).toBe("function");
+    expectTypeOf(api.tw).toBeFunction();
+    expectTypeOf(api.createTw).toBeFunction();
   });
 
-  it("View is the same as Block (alias)", () => {
+  it("view is the same as Block (alias)", () => {
     expect(api.View).toBe(api.Block);
   });
 
@@ -36,12 +35,12 @@ describe("public API exports", () => {
 
   it("exports cn helper", () => {
     expect(api.cn).toBeDefined();
-    expect(typeof api.cn).toBe("function");
+    expectTypeOf(api.cn).toBeFunction();
   });
 
   it("exports defineFont", () => {
     expect(api.defineFont).toBeDefined();
-    expect(typeof api.defineFont).toBe("function");
+    expectTypeOf(api.defineFont).toBeFunction();
   });
 
   it("exports react-pdf re-exports", () => {
@@ -75,15 +74,46 @@ describe("public API exports", () => {
 
   it("does not export unexpected items", () => {
     const expected = [
-      "Block", "View", "Text", "Page", "Image", "Link", "Document",
-      "Canvas", "Note", "PageNumber",
-      "Tailwind", "useTw",
-      "createTw", "tw", "resolveTheme",
+      "Block",
+      "View",
+      "Text",
+      "Page",
+      "Image",
+      "Link",
+      "Document",
+      "Canvas",
+      "Note",
+      "PageNumber",
+      "Tailwind",
+      "useTw",
+      "createTw",
+      "tw",
+      "resolveTheme",
       "cn",
       "defineFont",
-      "Font", "StyleSheet", "PDFViewer", "PDFDownloadLink", "BlobProvider", "usePDF", "pdf",
-      "Svg", "G", "Path", "Rect", "Circle", "Ellipse", "Line", "Polyline", "Polygon",
-      "SvgText", "Tspan", "Defs", "ClipPath", "Stop", "LinearGradient", "RadialGradient",
+      "Font",
+      "StyleSheet",
+      "PDFViewer",
+      "PDFDownloadLink",
+      "BlobProvider",
+      "usePDF",
+      "pdf",
+      "Svg",
+      "G",
+      "Path",
+      "Rect",
+      "Circle",
+      "Ellipse",
+      "Line",
+      "Polyline",
+      "Polygon",
+      "SvgText",
+      "Tspan",
+      "Defs",
+      "ClipPath",
+      "Stop",
+      "LinearGradient",
+      "RadialGradient",
     ];
     const exported = Object.keys(api);
     for (const key of exported) {

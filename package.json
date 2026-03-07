@@ -26,7 +26,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
-      "pnpm dlx ultracite fix"
+      "oxfmt --write",
+      "oxlint --fix --ignore-pattern '**/__tests__/**' --ignore-pattern '**/*.test.*'"
     ]
   },
   "packageManager": "pnpm@10.12.1",

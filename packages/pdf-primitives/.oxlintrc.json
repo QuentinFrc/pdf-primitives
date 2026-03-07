@@ -1,0 +1,31 @@
+{
+  "$schema": "../../node_modules/oxlint/configuration_schema.json",
+  "extends": [
+    "../../node_modules/ultracite/config/oxlint/core/.oxlintrc.json",
+    "../../node_modules/ultracite/config/oxlint/react/.oxlintrc.json"
+  ],
+  "rules": {
+    "sort-keys": "warn",
+    "curly": "warn",
+    "max-statements": "warn",
+    "no-negated-condition": "warn",
+    "no-inline-comments": "warn",
+    "no-nested-ternary": "warn",
+    "no-shadow": "warn",
+    "no-empty-function": "warn",
+    "prefer-template": "warn",
+    "prefer-destructuring": "warn",
+    "complexity": "warn",
+    "func-style": "warn",
+    "unicorn/prefer-number-properties": "warn",
+    "unicorn/consistent-function-scoping": "warn",
+    "import/no-relative-parent-imports": "warn",
+    "import/first": "warn",
+    "typescript/consistent-type-imports": "warn",
+    "typescript/no-explicit-any": "warn",
+    "react-perf/jsx-no-new-function-as-prop": "warn",
+    "no-duplicate-imports": "warn",
+    "react/display-name": "warn",
+    "react/jsx-pascal-case": "warn"
+  }
+}

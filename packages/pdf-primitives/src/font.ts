@@ -4,7 +4,17 @@
 import { Font } from "@react-pdf/renderer";
 
 type FontStyle = "normal" | "italic" | "oblique";
-type FontWeight = number | "thin" | "ultralight" | "light" | "normal" | "medium" | "semibold" | "bold" | "ultrabold" | "heavy";
+type FontWeight =
+  | number
+  | "thin"
+  | "ultralight"
+  | "light"
+  | "normal"
+  | "medium"
+  | "semibold"
+  | "bold"
+  | "ultrabold"
+  | "heavy";
 
 export interface FontVariant {
   src: string;
@@ -36,7 +46,7 @@ export interface FontResult {
   style: { fontFamily: string };
 }
 
-export function defineFont(options: DefineFontOptions): FontResult {
+export const defineFont = (options: DefineFontOptions): FontResult => {
   const { family, src } = options;
 
   if (typeof src === "string") {
@@ -45,17 +55,17 @@ export function defineFont(options: DefineFontOptions): FontResult {
     Font.register({
       family,
       fonts: src.map(({ src: fontSrc, weight, style, ...rest }) => ({
-        src: fontSrc,
-        fontWeight: weight,
         fontStyle: style,
+        fontWeight: weight,
+        src: fontSrc,
         ...rest,
       })),
     });
   }
 
   return {
-    family,
     className: `font-[${family}]`,
+    family,
     style: { fontFamily: family },
   };
-}
+};

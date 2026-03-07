@@ -1,10 +1,12 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-
-vi.mock("@react-pdf/renderer", () => ({
-  Font: { register: vi.fn() },
-}));
+vi.mock<typeof import("@react-pdf/renderer")>(
+  import("@react-pdf/renderer"),
+  () => ({
+    Font: { register: vi.fn() },
+  })
+);
 
 import { Font } from "@react-pdf/renderer";
+
 import { defineFont } from "../font";
 
 const mockRegister = Font.register as ReturnType<typeof vi.fn>;
@@ -27,7 +29,7 @@ describe("defineFont()", () => {
     });
     expect(result.family).toBe("Inter");
     expect(result.className).toBe("font-[Inter]");
-    expect(result.style).toEqual({ fontFamily: "Inter" });
+    expect(result.style).toStrictEqual({ fontFamily: "Inter" });
   });
 
   it("registers a multi-variant font family", () => {
@@ -36,7 +38,7 @@ describe("defineFont()", () => {
       src: [
         { src: "/fonts/Inter-Regular.ttf", weight: 400 },
         { src: "/fonts/Inter-Bold.ttf", weight: 700 },
-        { src: "/fonts/Inter-Italic.ttf", weight: 400, style: "italic" },
+        { src: "/fonts/Inter-Italic.ttf", style: "italic", weight: 400 },
       ],
     });
 
@@ -44,14 +46,22 @@ describe("defineFont()", () => {
     expect(mockRegister).toHaveBeenCalledWith({
       family: "Inter",
       fonts: [
-        { src: "/fonts/Inter-Regular.ttf", fontWeight: 400, fontStyle: undefined },
-        { src: "/fonts/Inter-Bold.ttf", fontWeight: 700, fontStyle: undefined },
-        { src: "/fonts/Inter-Italic.ttf", fontWeight: 400, fontStyle: "italic" },
+        {
+          fontStyle: undefined,
+          fontWeight: 400,
+          src: "/fonts/Inter-Regular.ttf",
+        },
+        { fontStyle: undefined, fontWeight: 700, src: "/fonts/Inter-Bold.ttf" },
+        {
+          fontStyle: "italic",
+          fontWeight: 400,
+          src: "/fonts/Inter-Italic.ttf",
+        },
       ],
     });
     expect(result.family).toBe("Inter");
     expect(result.className).toBe("font-[Inter]");
-    expect(result.style).toEqual({ fontFamily: "Inter" });
+    expect(result.style).toStrictEqual({ fontFamily: "Inter" });
   });
 
   it("passes through remote fetch options", () => {
@@ -59,9 +69,9 @@ describe("defineFont()", () => {
       family: "Custom",
       src: [
         {
+          headers: { Authorization: "Bearer token" },
           src: "https://example.com/font.woff2",
           weight: 400,
-          headers: { Authorization: "Bearer token" },
         },
       ],
     });
@@ -70,10 +80,10 @@ describe("defineFont()", () => {
       family: "Custom",
       fonts: [
         {
-          src: "https://example.com/font.woff2",
-          fontWeight: 400,
           fontStyle: undefined,
+          fontWeight: 400,
           headers: { Authorization: "Bearer token" },
+          src: "https://example.com/font.woff2",
         },
       ],
     });
@@ -83,6 +93,6 @@ describe("defineFont()", () => {
     const { tw } = await import("../tw");
     const font = defineFont({ family: "MyFont", src: "/fonts/MyFont.ttf" });
     const styles = tw(font.className);
-    expect(styles).toEqual({ fontFamily: "MyFont" });
+    expect(styles).toStrictEqual({ fontFamily: "MyFont" });
   });
 });
