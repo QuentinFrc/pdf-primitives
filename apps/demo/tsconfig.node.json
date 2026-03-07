@@ -5,7 +5,8 @@
     "target": "ES2023",
     "lib": ["ES2023"],
     "types": [],
-    "noEmit": true
+    "noEmit": true,
+    "strictNullChecks": true
   },
   "include": ["vite.config.ts"]
 }

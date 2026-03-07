@@ -1,6 +1,26 @@
 {
   "name": "@pdf-primitives/react",
   "version": "0.0.1",
+  "description": "React primitives for PDF generation with react-pdf",
+  "keywords": [
+    "pdf",
+    "primitives",
+    "react",
+    "react-pdf",
+    "tailwind"
+  ],
+  "homepage": "https://github.com/QuentinFrc/pdf-primitives",
+  "bugs": "https://github.com/QuentinFrc/pdf-primitives/issues",
+  "license": "MIT",
+  "author": "Quentin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuentinFrc/pdf-primitives.git",
+    "directory": "packages/pdf-primitives"
+  },
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -37,22 +57,17 @@
       }
     }
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "lint": "oxlint ."
   },
   "dependencies": {
     "@react-pdf/renderer": ">=4"
-  },
-  "peerDependencies": {
-    "react": ">=18"
   },
   "devDependencies": {
     "@react-pdf/renderer": "^4.3.2",
@@ -65,5 +80,8 @@
     "tsup": "^8",
     "typescript": "~5.9.3",
     "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "react": ">=18"
   }
 }
