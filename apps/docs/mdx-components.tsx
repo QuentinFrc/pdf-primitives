@@ -1,17 +1,22 @@
-import defaultMdxComponents from 'fumadocs-ui/mdx';
-import type { MDXComponents } from 'mdx/types';
-import { createGenerator, createFileSystemGeneratorCache } from 'fumadocs-typescript';
-import { AutoTypeTable } from 'fumadocs-typescript/ui';
+import {
+	createFileSystemGeneratorCache,
+	createGenerator,
+} from "fumadocs-typescript";
+import { AutoTypeTable } from "fumadocs-typescript/ui";
+import defaultMdxComponents from "fumadocs-ui/mdx";
+import type { MDXComponents } from "mdx/types";
 
 const generator = createGenerator({
-  cache: createFileSystemGeneratorCache('.next/fumadocs-typescript'),
-  tsconfigPath: '../../packages/pdf-primitives/tsconfig.json',
+	cache: createFileSystemGeneratorCache(".next/fumadocs-typescript"),
+	tsconfigPath: "../../packages/pdf-primitives/tsconfig.json",
 });
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
-  return {
-    ...defaultMdxComponents,
-    AutoTypeTable: (props) => <AutoTypeTable {...props} generator={generator} />,
-    ...components,
-  };
+	return {
+		...defaultMdxComponents,
+		AutoTypeTable: (props) => (
+			<AutoTypeTable {...props} generator={generator} />
+		),
+		...components,
+	};
 }

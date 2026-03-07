@@ -1,0 +1,15 @@
+{
+	"root": false,
+	"$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+	"extends": ["ultracite/biome/react", "ultracite/biome/next"],
+	"linter": {
+		"rules": {
+			"suspicious": {
+				"noExplicitAny": "warn"
+			},
+			"performance": {
+				"noBarrelFile": "off"
+			}
+		}
+	}
+}

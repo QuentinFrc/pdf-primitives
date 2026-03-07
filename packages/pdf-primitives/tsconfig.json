@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./dist",
-    "declaration": true,
-    "noEmit": true,
-    "strictNullChecks": true
-  },
-  "include": ["src"]
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "./dist",
+		"declaration": true,
+		"noEmit": true,
+		"strictNullChecks": true
+	},
+	"include": ["src"]
 }

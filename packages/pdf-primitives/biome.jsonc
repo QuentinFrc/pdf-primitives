@@ -1,0 +1,23 @@
+{
+	"root": false,
+	"$schema": "../../node_modules/@biomejs/biome/configuration_schema.json",
+	"extends": ["ultracite/biome/react"],
+	"linter": {
+		"rules": {
+			"suspicious": {
+				"noExplicitAny": "warn"
+			},
+			"style": {
+				"noParameterAssign": "warn",
+				"noNonNullAssertion": "warn"
+			},
+			"complexity": {
+				"noForEach": "warn",
+				"noExcessiveCognitiveComplexity": "warn"
+			},
+			"performance": {
+				"noBarrelFile": "off"
+			}
+		}
+	}
+}

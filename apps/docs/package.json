@@ -1,29 +1,28 @@
 {
-  "name": "docs",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "oxlint ."
-  },
-  "dependencies": {
-    "@types/mdx": "^2",
-    "fumadocs-core": "latest",
-    "fumadocs-mdx": "latest",
-    "fumadocs-typescript": "^5.1.5",
-    "fumadocs-ui": "latest",
-    "next": "^16",
-    "react": "^19",
-    "react-dom": "^19"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "25.3.5",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "tailwindcss": "^4",
-    "typescript": "~5.9.3"
-  }
+	"name": "docs",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"@types/mdx": "^2",
+		"fumadocs-core": "latest",
+		"fumadocs-mdx": "latest",
+		"fumadocs-typescript": "^5.1.5",
+		"fumadocs-ui": "latest",
+		"next": "^16",
+		"react": "^19",
+		"react-dom": "^19"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "25.3.5",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"tailwindcss": "^4",
+		"typescript": "~5.9.3"
+	}
 }

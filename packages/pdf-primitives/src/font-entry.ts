@@ -1,2 +1,2 @@
+export type { DefineFontOptions, FontResult, FontVariant } from "./font";
 export { defineFont } from "./font";
-export type { DefineFontOptions, FontVariant, FontResult } from "./font";

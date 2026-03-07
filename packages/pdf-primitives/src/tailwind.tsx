@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useMemo } from "react";
-
-import { createTw, tw as defaultTw } from "./tw";
+import type React from "react";
+import { createContext, useContext, useMemo } from "react";
 import type { ThemeVars, TwFn } from "./tw";
+import { createTw, tw as defaultTw } from "./tw";
 
 // ─── Context ─────────────────────────────────────────────────────────────────
 
@@ -23,16 +23,16 @@ const TailwindContext = createContext<TwFn>(defaultTw);
 //   </Tailwind>
 
 export const Tailwind = ({
-  theme,
-  children,
+	theme,
+	children,
 }: {
-  theme?: ThemeVars;
-  children: React.ReactNode;
+	theme?: ThemeVars;
+	children: React.ReactNode;
 }) => {
-  const tw = useMemo(() => (theme ? createTw(theme) : defaultTw), [theme]);
-  return (
-    <TailwindContext.Provider value={tw}>{children}</TailwindContext.Provider>
-  );
+	const tw = useMemo(() => (theme ? createTw(theme) : defaultTw), [theme]);
+	return (
+		<TailwindContext.Provider value={tw}>{children}</TailwindContext.Provider>
+	);
 };
 
 // ─── useTw() ─────────────────────────────────────────────────────────────────

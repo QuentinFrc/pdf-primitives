@@ -1,8 +1,8 @@
-export { createTw, tw, resolveTheme } from "./tw";
 export type {
-  ThemeVars,
-  TwFn,
-  StyleObject,
-  StyleValue,
-  ResolvedTheme,
+	ResolvedTheme,
+	StyleObject,
+	StyleValue,
+	ThemeVars,
+	TwFn,
 } from "./tw";
+export { createTw, resolveTheme, tw } from "./tw";

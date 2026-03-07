@@ -1,21 +1,21 @@
 {
-  "title": "Documentation",
-  "root": true,
-  "pages": [
-    "index",
-    "---Getting Started---",
-    "...getting-started",
-    "---Components---",
-    "...components",
-    "---Styling---",
-    "utility-classes",
-    "theming",
-    "fonts",
-    "---Utilities---",
-    "helpers",
-    "svg",
-    "re-exports",
-    "---",
-    "api-reference"
-  ]
+	"title": "Documentation",
+	"root": true,
+	"pages": [
+		"index",
+		"---Getting Started---",
+		"...getting-started",
+		"---Components---",
+		"...components",
+		"---Styling---",
+		"utility-classes",
+		"theming",
+		"fonts",
+		"---Utilities---",
+		"helpers",
+		"svg",
+		"re-exports",
+		"---",
+		"api-reference"
+	]
 }

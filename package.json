@@ -4,10 +4,9 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
+    "lint": "ultracite check",
+    "lint:fix": "ultracite fix",
     "check-types": "turbo check-types",
-    "check": "ultracite check",
-    "fix": "ultracite fix",
     "prepare": "husky",
     "changeset": "changeset",
     "version": "changeset version",
@@ -19,15 +18,12 @@
     "@changesets/cli": "^2.30.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.2",
-    "oxfmt": "^0.36.0",
-    "oxlint": "^1.51.0",
     "turbo": "^2",
     "ultracite": "^7.2.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
-      "oxfmt --write",
-      "oxlint --fix --ignore-pattern '**/__tests__/**' --ignore-pattern '**/*.test.*'"
+      "ultracite fix"
     ]
   },
   "packageManager": "pnpm@10.12.1",
