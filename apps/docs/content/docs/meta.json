@@ -2,16 +2,20 @@
   "title": "Documentation",
   "root": true,
   "pages": [
-    "---Getting Started---",
     "index",
+    "---Getting Started---",
+    "...getting-started",
     "---Components---",
     "...components",
     "---Styling---",
     "utility-classes",
     "theming",
+    "fonts",
     "---Utilities---",
     "helpers",
     "svg",
-    "re-exports"
+    "re-exports",
+    "---",
+    "api-reference"
   ]
 }

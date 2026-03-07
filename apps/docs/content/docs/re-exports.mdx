@@ -6,19 +6,10 @@ description: PDF generation utilities and viewer components.
 These utilities are included in @pdf-primitives/react for convenience so you can import everything from a single package.
 
 ```ts
-import { Font, StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@pdf-primitives/react";
+import { StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@pdf-primitives/react";
 ```
 
-## Font
-
-Register custom fonts for use in your PDF documents.
-
-```ts
-Font.register({
-  family: "Inter",
-  src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hjQ.woff2",
-});
-```
+For font registration, see [`defineFont()`](/docs/fonts) — the recommended API. The raw `Font` object from react-pdf is also available as `Font` if needed.
 
 ## StyleSheet
 

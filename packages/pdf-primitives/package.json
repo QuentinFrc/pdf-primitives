@@ -16,6 +16,16 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./font": {
+      "import": {
+        "types": "./dist/font-entry.d.ts",
+        "default": "./dist/font-entry.js"
+      },
+      "require": {
+        "types": "./dist/font-entry.d.cts",
+        "default": "./dist/font-entry.cjs"
+      }
+    },
     "./tw": {
       "import": {
         "types": "./dist/tw-entry.d.ts",

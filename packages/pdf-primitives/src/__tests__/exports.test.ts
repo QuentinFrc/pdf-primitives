@@ -39,6 +39,11 @@ describe("public API exports", () => {
     expect(typeof api.cn).toBe("function");
   });
 
+  it("exports defineFont", () => {
+    expect(api.defineFont).toBeDefined();
+    expect(typeof api.defineFont).toBe("function");
+  });
+
   it("exports react-pdf re-exports", () => {
     expect(api.Font).toBeDefined();
     expect(api.StyleSheet).toBeDefined();
@@ -75,6 +80,7 @@ describe("public API exports", () => {
       "Tailwind", "useTw",
       "createTw", "tw", "resolveTheme",
       "cn",
+      "defineFont",
       "Font", "StyleSheet", "PDFViewer", "PDFDownloadLink", "BlobProvider", "usePDF", "pdf",
       "Svg", "G", "Path", "Rect", "Circle", "Ellipse", "Line", "Polyline", "Polygon",
       "SvgText", "Tspan", "Defs", "ClipPath", "Stop", "LinearGradient", "RadialGradient",
