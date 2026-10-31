@@ -73,3 +73,20 @@ Generate a PDF blob outside of React (e.g. in a server endpoint or script).
 const blob = await pdf(<MyDocument />).toBlob();
 const buffer = await pdf(<MyDocument />).toBuffer();
 ```
+
+## renderToBuffer / renderToStream / renderToFile
+
+Node-only helpers for server-side generation (route handlers, scripts, jobs).
+
+```ts title="app/invoice/route.ts"
+import { renderToBuffer } from "@ui-registry/pdf";
+
+export async function GET() {
+  const buffer = await renderToBuffer(<Invoice />);
+  return new Response(buffer, {
+    headers: { "Content-Type": "application/pdf" },
+  });
+}
+```
+
+`renderToStream(<Doc />)` returns a Node readable stream; `renderToFile(<Doc />, "out.pdf")` writes to disk.

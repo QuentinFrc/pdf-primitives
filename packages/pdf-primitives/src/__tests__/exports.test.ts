@@ -53,6 +53,13 @@ describe("public API exports", () => {
 		expect(api.pdf).toBeDefined();
 	});
 
+	it("exports server-side render functions", () => {
+		expect(api.renderToBuffer).toBeDefined();
+		expect(api.renderToFile).toBeDefined();
+		expect(api.renderToStream).toBeDefined();
+		expect(api.renderToString).toBeDefined();
+	});
+
 	it("exports SVG elements", () => {
 		expect(api.Svg).toBeDefined();
 		expect(api.G).toBeDefined();
@@ -98,6 +105,10 @@ describe("public API exports", () => {
 			"BlobProvider",
 			"usePDF",
 			"pdf",
+			"renderToBuffer",
+			"renderToFile",
+			"renderToStream",
+			"renderToString",
 			"Svg",
 			"G",
 			"Path",

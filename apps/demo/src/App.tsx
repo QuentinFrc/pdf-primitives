@@ -1,5 +1,12 @@
-import { Font, PDFViewer } from "@react-pdf/renderer";
-import { Document, Link, Page, Tailwind, Text, View } from "@ui-registry/pdf";
+import {
+	Document,
+	Font,
+	Link,
+	Page,
+	PDFViewer,
+	Text,
+	View,
+} from "@ui-registry/pdf";
 
 Font.register({
 	family: "Inter",
@@ -30,7 +37,7 @@ const theme = {
 
 function MyDocument() {
 	return (
-		<Document>
+		<Document theme={theme}>
 			<Page className="p-10 bg-white" style={{ fontFamily: "Inter" }}>
 				<Text className="text-3xl font-bold text-foreground mb-2">
 					pdf-primitives
@@ -155,11 +162,8 @@ function MyDocument() {
 export default function App() {
 	return (
 		<div style={{ height: "100vh" }}>
-			{/* PDFViewer renders in a separate React root: <Tailwind> must be inside it */}
 			<PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
-				<Tailwind theme={theme}>
-					<MyDocument />
-				</Tailwind>
+				<MyDocument />
 			</PDFViewer>
 		</div>
 	);

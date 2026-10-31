@@ -3,30 +3,29 @@ title: Document
 description: Root wrapper for the entire PDF.
 ---
 
-The top-level container for a PDF. Every PDF starts with a `Document` containing one or more `Page` elements. Does **not** support `className` (documents have no visual styles).
+The top-level container for a PDF. Every PDF starts with a `Document` containing one or more `Page` elements. Does **not** support `className` (documents have no visual styles), but accepts a `theme` prop that applies your theme variables to the whole document.
 
 ## Demo
 
 ### Basic document with metadata
 
 ```tsx
-import { Document, Page, Block, Text, Tailwind, PDFViewer } from "@ui-registry/pdf";
+import { Document, Page, Text, PDFViewer } from "@ui-registry/pdf";
 
 function Invoice() {
   return (
-    <Tailwind>
-      <Document
-        title="Invoice #001"
-        author="Acme Corp"
-        subject="Monthly Invoice"
-        keywords="invoice, billing"
-      >
-        <Page size="A4" className="p-12 bg-white">
-          <Text className="text-2xl font-bold text-gray-900">Invoice #001</Text>
-          <Text className="text-sm text-gray-500 mt-1">Acme Corp</Text>
-        </Page>
-      </Document>
-    </Tailwind>
+    <Document
+      theme={{ "--color-brand": "#0073e6" }}
+      title="Invoice #001"
+      author="Acme Corp"
+      subject="Monthly Invoice"
+      keywords="invoice, billing"
+    >
+      <Page size="A4" className="p-12 bg-white">
+        <Text className="text-2xl font-bold text-brand">Invoice #001</Text>
+        <Text className="text-sm text-gray-500 mt-1">Acme Corp</Text>
+      </Page>
+    </Document>
   );
 }
 

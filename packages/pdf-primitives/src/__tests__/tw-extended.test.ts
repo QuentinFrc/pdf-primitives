@@ -208,13 +208,21 @@ describe("tw() — arbitrary units", () => {
 		expect(tw("w-[50%]")).toStrictEqual({ width: "50%" });
 	});
 
-	it("m-[10pt]", () => {
+	it("m-[10pt] → plain number (pt is the native unit)", () => {
 		expect(tw("m-[10pt]")).toStrictEqual({
-			marginBottom: "10pt",
-			marginLeft: "10pt",
-			marginRight: "10pt",
-			marginTop: "10pt",
+			marginBottom: 10,
+			marginLeft: 10,
+			marginRight: 10,
+			marginTop: 10,
 		});
+	});
+
+	it("px converts to pt (1px = 0.75pt)", () => {
+		expect(tw("w-[12px]")).toStrictEqual({ width: 9 });
+	});
+
+	it("rem converts to pt (1rem = 12pt)", () => {
+		expect(tw("w-[2rem]")).toStrictEqual({ width: 24 });
 	});
 });
 
@@ -368,5 +376,134 @@ describe("tw() — transform composition", () => {
 
 	it("single transform still works", () => {
 		expect(tw("rotate-90")).toStrictEqual({ transform: "rotate(90deg)" });
+	});
+});
+
+describe("tw() — auto margins", () => {
+	it("m-auto", () => {
+		expect(tw("m-auto")).toStrictEqual({
+			marginBottom: "auto",
+			marginLeft: "auto",
+			marginRight: "auto",
+			marginTop: "auto",
+		});
+	});
+
+	it("mx-auto → explicit left/right", () => {
+		expect(tw("mx-auto")).toStrictEqual({
+			marginLeft: "auto",
+			marginRight: "auto",
+		});
+	});
+
+	it("my-auto → explicit top/bottom", () => {
+		expect(tw("my-auto")).toStrictEqual({
+			marginBottom: "auto",
+			marginTop: "auto",
+		});
+	});
+
+	it("ml-auto", () => {
+		expect(tw("ml-auto")).toStrictEqual({ marginLeft: "auto" });
+	});
+
+	it("p-auto is not a valid class", () => {
+		expect(tw("p-auto")).toStrictEqual({});
+	});
+});
+
+describe("tw() — arbitrary font size", () => {
+	it("text-[12] → pt", () => {
+		expect(tw("text-[12]")).toStrictEqual({ fontSize: 12 });
+	});
+
+	it("text-[12px] → converted to pt", () => {
+		expect(tw("text-[12px]")).toStrictEqual({ fontSize: 9 });
+	});
+
+	it("text-[1.5rem] → converted to pt", () => {
+		expect(tw("text-[1.5rem]")).toStrictEqual({ fontSize: 18 });
+	});
+
+	it("text-[10pt] → pt", () => {
+		expect(tw("text-[10pt]")).toStrictEqual({ fontSize: 10 });
+	});
+
+	it("text-[#f00] is still a color", () => {
+		expect(tw("text-[#f00]")).toStrictEqual({ color: "#f00" });
+	});
+});
+
+describe("tw() — line height", () => {
+	it("leading-6 → absolute (spacing scale)", () => {
+		expect(tw("leading-6")).toStrictEqual({ lineHeight: "18pt" });
+	});
+
+	it("leading-tight → multiplier", () => {
+		expect(tw("leading-tight")).toStrictEqual({ lineHeight: 1.25 });
+	});
+
+	it("leading-[1.2] → multiplier", () => {
+		expect(tw("leading-[1.2]")).toStrictEqual({ lineHeight: 1.2 });
+	});
+
+	it("leading-[18px] → absolute pt", () => {
+		expect(tw("leading-[18px]")).toStrictEqual({ lineHeight: "13.5pt" });
+	});
+
+	it("text-sm/6 → font size + absolute line height", () => {
+		expect(tw("text-sm/6")).toStrictEqual({
+			fontSize: 10.5,
+			lineHeight: "18pt",
+		});
+	});
+
+	it("text-xs/[1.4] → font size + multiplier", () => {
+		expect(tw("text-xs/[1.4]")).toStrictEqual({ fontSize: 9, lineHeight: 1.4 });
+	});
+
+	it("text-red-500/50 is still a color with opacity", () => {
+		expect(tw("text-red-500/50")).toStrictEqual({
+			color: "rgba(239, 68, 68, 0.5)",
+		});
+	});
+});
+
+describe("tw() — border-x / border-y", () => {
+	it("border-x", () => {
+		expect(tw("border-x")).toStrictEqual({
+			borderLeftWidth: 1,
+			borderRightWidth: 1,
+		});
+	});
+
+	it("border-y-2", () => {
+		expect(tw("border-y-2")).toStrictEqual({
+			borderBottomWidth: 2,
+			borderTopWidth: 2,
+		});
+	});
+
+	it("border-x-red-500", () => {
+		expect(tw("border-x-red-500")).toStrictEqual({
+			borderLeftColor: "#ef4444",
+			borderRightColor: "#ef4444",
+		});
+	});
+
+	it("border-y-dashed", () => {
+		expect(tw("border-y-dashed")).toStrictEqual({
+			borderBottomStyle: "dashed",
+			borderTopStyle: "dashed",
+		});
+	});
+});
+
+describe("tw() — truncate", () => {
+	it("truncate → single line with ellipsis", () => {
+		expect(tw("truncate")).toStrictEqual({
+			maxLines: 1,
+			textOverflow: "ellipsis",
+		});
 	});
 });

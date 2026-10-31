@@ -4,7 +4,11 @@
 // are re-exported as-is — they use SVGPresentationAttributes which are
 // set via props (fill, stroke, etc.), not CSS classes.
 
-import type { GProps, SVGProps, SVGTextProps } from "@react-pdf/renderer";
+import type {
+	GProps as RPGProps,
+	SVGProps as RPSVGProps,
+	SVGTextProps as RPSVGTextProps,
+} from "@react-pdf/renderer";
 import {
 	Circle,
 	ClipPath,
@@ -25,57 +29,44 @@ import {
 } from "@react-pdf/renderer";
 import type React from "react";
 
-import { useTw } from "./tailwind";
-
-// ─── Helper: merge className (tw) + style ────────────────────────────────────
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useStyles = (className?: string, style?: object | object[]): any => {
-	const tw = useTw();
-	const twStyle = className ? tw(className) : undefined;
-	const styleArr = Array.isArray(style) ? style : style ? [style] : [];
-	return twStyle
-		? [twStyle, ...styleArr]
-		: styleArr.length
-			? styleArr
-			: undefined;
-};
+import type { Style } from "./styles";
+import { useStyles } from "./styles";
 
 // ─── Svg ─────────────────────────────────────────────────────────────────────
 
-export interface PDFSvgProps extends Omit<SVGProps, "style"> {
+export interface SvgProps extends Omit<RPSVGProps, "style"> {
 	children?: React.ReactNode;
 	className?: string;
-	style?: object | object[];
+	style?: Style;
 }
 
-export const Svg = ({ className, style, ...props }: PDFSvgProps) => {
+export const Svg = ({ className, style, ...props }: SvgProps) => {
 	const merged = useStyles(className, style);
 	return <RPSvg style={merged} {...props} />;
 };
 
 // ─── G (Group) ───────────────────────────────────────────────────────────────
 
-export interface PDFGProps extends Omit<GProps, "style"> {
+export interface GProps extends Omit<RPGProps, "style"> {
 	children?: React.ReactNode;
 	className?: string;
-	style?: object | object[];
+	style?: Style;
 }
 
-export const G = ({ className, style, ...props }: PDFGProps) => {
+export const G = ({ className, style, ...props }: GProps) => {
 	const merged = useStyles(className, style);
 	return <RPG style={merged} {...props} />;
 };
 
 // ─── SvgText ─────────────────────────────────────────────────────────────────
 
-export interface PDFSvgTextProps extends Omit<SVGTextProps, "style"> {
+export interface SvgTextProps extends Omit<RPSVGTextProps, "style"> {
 	children?: React.ReactNode;
 	className?: string;
-	style?: object | object[];
+	style?: Style;
 }
 
-export const SvgText = ({ className, style, ...props }: PDFSvgTextProps) => {
+export const SvgText = ({ className, style, ...props }: SvgTextProps) => {
 	const merged = useStyles(className, style);
 	return <RPSvgText style={merged} {...props} />;
 };

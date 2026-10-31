@@ -683,21 +683,37 @@ export function resolveTheme(vars?: ThemeVars): ResolvedTheme {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Parser = (value: string) => any;
 
+// Arbitrary length: "12" → 12 (pt), "12px" → 9 (1px = 0.75pt), "1rem" → 12
+// (1rem = 16px), other units (pt, in, mm, cm, vw, vh, %) pass through as-is.
+// Returns undefined for values that are not lengths (e.g. colors).
+function arbitraryLength(inner: string): number | string | undefined {
+	const m = inner.match(/^(-?\d*\.?\d+)(px|rem|pt|in|mm|cm|vw|vh|%)?$/);
+	if (!m) {
+		return undefined;
+	}
+	const n = Number(m[1]);
+	switch (m[2]) {
+		case undefined:
+		case "pt":
+			return n;
+		case "px":
+			return n * 0.75;
+		case "rem":
+			return n * 12;
+		default:
+			return inner;
+	}
+}
+
 function buildMatchers(t: ResolvedTheme): Parser[] {
 	function spacing(v: string): number | string | undefined {
 		if (v in t.spacing) {
 			return t.spacing[v];
 		}
-		// Arbitrary value: [100] or [210mm] or [50vw] or [1in] or [50%]
+		// Arbitrary value: [100] or [12px] or [210mm] or [50vw] or [1in] or [50%]
 		const arb = v.match(/^\[(.+)\]$/);
 		if (arb) {
-			const inner = arb[1];
-			// If it has a unit suffix, return as raw string
-			if (/[a-z%]$/i.test(inner) && !/^[\d.]+$/.test(inner)) {
-				return inner;
-			}
-			const n = Number(inner);
-			return Number.isNaN(n) ? inner : n;
+			return arbitraryLength(arb[1]) ?? arb[1];
 		}
 		return undefined;
 	}
@@ -758,12 +774,56 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 		return hexToRgba(hex, alpha / 100);
 	}
 
+	// marginHorizontal → marginLeft + marginRight (explicit sides for "auto")
+	function expandAxis(prop: string): string[] {
+		if (prop.endsWith("Horizontal")) {
+			const base = prop.slice(0, -10);
+			return [`${base}Left`, `${base}Right`];
+		}
+		if (prop.endsWith("Vertical")) {
+			const base = prop.slice(0, -8);
+			return [`${base}Top`, `${base}Bottom`];
+		}
+		return [prop];
+	}
+
+	// Line height: named (tight) → multiplier, spacing (6) → absolute,
+	// arbitrary: [1.2] → multiplier, [18px] → absolute.
+	// react-pdf treats unitless numbers as multipliers, so absolute values
+	// are emitted as "<n>pt" strings.
+	function lineHeight(v: string): StyleValue | undefined {
+		if (v in t.lineHeight) {
+			return t.lineHeight[v];
+		}
+		const arb = v.match(/^\[(.+)\]$/);
+		if (arb) {
+			const inner = arb[1];
+			if (/^\d*\.?\d+$/.test(inner)) {
+				return Number(inner);
+			}
+			const len = arbitraryLength(inner);
+			return typeof len === "number" ? `${len}pt` : len;
+		}
+		const sp = spacing(v);
+		return typeof sp === "number" ? `${sp}pt` : undefined;
+	}
+
 	function spacingProp(prefix: string, props: string[]): Parser {
 		return (cls: string) => {
 			if (!cls.startsWith(`${prefix}-`)) {
 				return null;
 			}
 			const raw = cls.slice(prefix.length + 1);
+			if (raw === "auto") {
+				if (!props[0].startsWith("margin")) {
+					return null;
+				}
+				const out: StyleObject = {};
+				for (const p of props.flatMap(expandAxis)) {
+					out[p] = "auto";
+				}
+				return out;
+			}
 			const negative = raw.startsWith("-");
 			const val = spacing(negative ? raw.slice(1) : raw);
 			if (val === undefined) {
@@ -1080,6 +1140,9 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 
 		// ── Text overflow ──
 		(cls) => {
+			if (cls === "truncate") {
+				return { maxLines: 1, textOverflow: "ellipsis" };
+			}
 			if (cls === "text-ellipsis") {
 				return { textOverflow: "ellipsis" };
 			}
@@ -1094,15 +1157,24 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 			if (!cls.startsWith("text-")) {
 				return null;
 			}
-			const key = cls.slice(5);
+			// text-sm/6 → font size + line height
+			const slash = cls.indexOf("/", 5);
+			const key = slash === -1 ? cls.slice(5) : cls.slice(5, slash);
+			let size: StyleValue | undefined;
 			if (key in t.fontSize) {
-				return { fontSize: t.fontSize[key] };
+				size = t.fontSize[key];
+			} else {
+				const arb = key.match(/^\[(.+)\]$/);
+				size = arb ? arbitraryLength(arb[1]) : undefined;
 			}
-			const arb = key.match(/^\[(\d+(?:\.\d+)?)\]$/);
-			if (arb) {
-				return { fontSize: Number(arb[1]) };
+			if (size === undefined) {
+				return null;
 			}
-			return null;
+			if (slash === -1) {
+				return { fontSize: size };
+			}
+			const lh = lineHeight(cls.slice(slash + 1));
+			return lh === undefined ? null : { fontSize: size, lineHeight: lh };
 		},
 
 		// ── Text color (--color-*) ──
@@ -1193,12 +1265,8 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 			if (!cls.startsWith("leading-")) {
 				return null;
 			}
-			const v = cls.slice(8);
-			if (v in t.lineHeight) {
-				return { lineHeight: t.lineHeight[v] };
-			}
-			const n = Number(v);
-			return Number.isNaN(n) ? null : { lineHeight: n };
+			const lh = lineHeight(cls.slice(8));
+			return lh === undefined ? null : { lineHeight: lh };
 		},
 
 		// ── Letter spacing (--tracking-*) ──
@@ -1231,6 +1299,20 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 			}
 			if (/^border-[0-9]/.test(cls)) {
 				return { borderWidth: Number(cls.slice(7)) };
+			}
+			for (const [axis, props] of [
+				["x", ["borderLeftWidth", "borderRightWidth"]],
+				["y", ["borderTopWidth", "borderBottomWidth"]],
+			] as const) {
+				const width =
+					cls === `border-${axis}`
+						? 1
+						: cls.startsWith(`border-${axis}-`)
+							? Number(cls.slice(9))
+							: Number.NaN;
+				if (!Number.isNaN(width)) {
+					return { [props[0]]: width, [props[1]]: width };
+				}
 			}
 			for (const [side, prop] of [
 				["t", "borderTopWidth"],
@@ -1272,26 +1354,29 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 
 		// ── Border per-side color & style ──
 		(cls) => {
-			const sides: Record<string, string> = {
-				b: "Bottom",
-				l: "Left",
-				r: "Right",
-				t: "Top",
+			const sides: Record<string, string[]> = {
+				b: ["Bottom"],
+				l: ["Left"],
+				r: ["Right"],
+				t: ["Top"],
+				x: ["Left", "Right"],
+				y: ["Top", "Bottom"],
 			};
-			for (const [s, cap] of Object.entries(sides)) {
+			for (const [s, caps] of Object.entries(sides)) {
 				const prefix = `border-${s}-`;
 				if (!cls.startsWith(prefix)) {
 					continue;
 				}
 				const val = cls.slice(prefix.length);
-				// Style keywords
-				if (val === "solid" || val === "dashed" || val === "dotted") {
-					return { [`border${cap}Style`]: val };
-				}
-				// Color
-				const c = resolveColorAlpha(val);
-				if (c) {
-					return { [`border${cap}Color`]: c };
+				// Style keywords, then color
+				const isStyle = val === "solid" || val === "dashed" || val === "dotted";
+				const v = isStyle ? val : resolveColorAlpha(val);
+				if (v) {
+					const out: StyleObject = {};
+					for (const cap of caps) {
+						out[`border${cap}${isStyle ? "Style" : "Color"}`] = v;
+					}
+					return out;
 				}
 			}
 			return null;
@@ -1619,8 +1704,8 @@ export function createTw(vars?: ThemeVars): TwFn {
 			}
 		}
 		if (
-			process !== undefined &&
-			process?.env?.NODE_ENV !== "production" &&
+			typeof process !== "undefined" &&
+			process.env?.NODE_ENV !== "production" &&
 			!warned.has(cls)
 		) {
 			warned.add(cls);

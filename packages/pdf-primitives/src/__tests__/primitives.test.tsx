@@ -216,6 +216,25 @@ describe(Document, () => {
 			getByTestId("rp-document").querySelector("[data-testid='rp-page']"),
 		).toBeTruthy();
 	});
+
+	it("provides theme to children via theme prop", () => {
+		const { getByTestId } = render(
+			<Document theme={{ "--color-brand": "#ff6600" }}>
+				<Text className="text-brand" />
+			</Document>,
+		);
+		const style = getStyle(getByTestId("rp-text"));
+		expect(style).toStrictEqual([{ color: "#ff6600" }]);
+	});
+
+	it("does not forward theme prop to react-pdf Document", () => {
+		const { getByTestId } = render(
+			<Document theme={{ "--color-brand": "#ff6600" }} title="Report" />,
+		);
+		const doc = getByTestId("rp-document");
+		expect(doc.getAttribute("theme")).toBeNull();
+		expect(doc.getAttribute("title")).toBe("Report");
+	});
 });
 
 describe(Canvas, () => {

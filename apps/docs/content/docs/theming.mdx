@@ -3,30 +3,30 @@ title: Theming
 description: Customize colors, spacing, typography, and more with the Tailwind provider.
 ---
 
-## Tailwind Provider
+## Document theme
 
-Wrap your document tree in `<Tailwind>` to provide a tw engine to all components. Without it, components use the default theme.
+Pass your theme variables to `<Document theme>`. Without a theme, components use the defaults.
 
 ```tsx
-import { Tailwind, Document, Page, Block, Text } from "@ui-registry/pdf";
+import { Document, Page, Text } from "@ui-registry/pdf";
 
-<Tailwind>
-  <Document>
-    <Page className="p-12">
-      <Text className="text-primary">Uses default theme</Text>
-    </Page>
-  </Document>
-</Tailwind>
+<Document theme={{ "--color-primary": "#0073e6" }}>
+  <Page className="p-12">
+    <Text className="text-primary">Uses the custom theme</Text>
+  </Page>
+</Document>
 ```
 
-<Callout type="warn" title="Place the provider inside PDFViewer">
-`PDFViewer`, `PDFDownloadLink`, `BlobProvider`, `usePDF` and `pdf()` render the document in a separate React root, so React context does not cross them. A `<Tailwind>` placed around `<PDFViewer>` is ignored: place it inside, around `<Document>`.
+## Tailwind Provider
+
+`<Tailwind theme>` does the same thing as a standalone provider, for example to theme only part of a document.
+
+<Callout type="warn" title="Keep the theme inside PDFViewer">
+`PDFViewer`, `PDFDownloadLink`, `BlobProvider`, `usePDF` and `pdf()` render the document in a separate React root, so React context does not cross them. A `<Tailwind>` placed around `<PDFViewer>` is ignored. `<Document theme>` avoids the problem entirely.
 
 ```tsx
 <PDFViewer>
-  <Tailwind theme={theme}>
-    <Document>...</Document>
-  </Tailwind>
+  <Document theme={theme}>...</Document>
 </PDFViewer>
 ```
 </Callout>

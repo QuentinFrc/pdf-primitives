@@ -13,10 +13,11 @@ Any utility that accepts a numeric value also supports arbitrary values with `[.
 <Block className="w-[210mm] h-[297mm]" />        {/* A4 page size */}
 <Block className="p-[20]" />                       {/* 20pt padding */}
 <Text className="text-[14]" />                     {/* 14pt font */}
+<Text className="text-[12px]" />                   {/* 12px → 9pt */}
 <Block className="aspect-[4/3]" />                 {/* 4:3 ratio */}
 ```
 
-Values with unit suffixes (mm, in, %, vw) are passed as strings. Plain numbers are passed as numbers.
+Plain numbers and `pt` values are points. `px` and `rem` are converted to points with the same ratio as the rest of the scale (1px = 0.75pt, 1rem = 12pt). Other units (`mm`, `cm`, `in`, `%`, `vw`, `vh`) are passed to react-pdf as-is.
 
 ## Layout & Display
 
@@ -98,6 +99,8 @@ Padding and margin utilities follow the standard Tailwind pattern. Negative valu
 ### Margin
 
 `m-{n}`, `mx-{n}`, `my-{n}`, `mt-{n}`, `mr-{n}`, `mb-{n}`, `ml-{n}`
+
+Auto margins: `m-auto`, `mx-auto` (center horizontally), `ml-auto` (push to the right in a row), etc.
 
 ### Gap
 
@@ -225,7 +228,9 @@ Negative values supported: `-inset-x-4`, `-inset-y-2`, `-inset-4`.
 | `text-4xl` | 27 | 36px |
 | `text-5xl` | 36 | 48px |
 
-Arbitrary: `text-[14]` for 14pt.
+Arbitrary: `text-[14]` for 14pt, `text-[12px]`, `text-[1rem]`.
+
+Font size with line height: `text-sm/6` (line height from the spacing scale), `text-sm/[1.4]` (multiplier).
 
 ### Font Weight
 
@@ -282,6 +287,7 @@ Decoration style: `decoration-solid`, `decoration-dashed`, `decoration-dotted`, 
 
 | Class | Style |
 |-------|-------|
+| `truncate` | `maxLines: 1`, `textOverflow: ellipsis` |
 | `text-ellipsis` | `textOverflow: ellipsis` |
 | `text-clip` | `textOverflow: clip` |
 
@@ -296,7 +302,9 @@ Decoration style: `decoration-solid`, `decoration-dashed`, `decoration-dotted`, 
 | `leading-relaxed` | 1.625 |
 | `leading-loose` | 2 |
 
-Arbitrary: `leading-{n}` for any numeric value (e.g. `leading-2`).
+Spacing scale (absolute, like Tailwind v4): `leading-6` → 18pt.
+
+Arbitrary: `leading-[1.2]` (multiplier of the font size), `leading-[18px]` (absolute).
 
 ### Letter Spacing
 
@@ -388,16 +396,18 @@ Usage: `bg-primary`, `text-muted-foreground`, `border-border`, etc.
 | `border-{2-8}` | 2–8 |
 | `border-t`, `border-r`, `border-b`, `border-l` | 1 (single side) |
 | `border-{t\|r\|b\|l}-{n}` | n (single side) |
+| `border-x`, `border-y` | 1 (two sides) |
+| `border-{x\|y}-{n}` | n (two sides) |
 
 ### Style
 
 `border-solid`, `border-dashed`, `border-dotted`
 
-Per-side style: `border-{t|r|b|l}-solid`, `border-{t|r|b|l}-dashed`, `border-{t|r|b|l}-dotted`
+Per-side style: `border-{t|r|b|l|x|y}-solid`, `border-{t|r|b|l}-dashed`, `border-{t|r|b|l}-dotted`
 
 ### Per-Side Color
 
-`border-{t|r|b|l}-{color}` — applies color to a single border side.
+`border-{t|r|b|l|x|y}-{color}` — applies color to one side (or two with `x` / `y`).
 
 ```tsx
 <Block className="border-t-red-500 border-b-blue-500" />
