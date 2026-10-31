@@ -9,6 +9,8 @@
 		"...components",
 		"---Registry---",
 		"...registry",
+		"---Blocks---",
+		"...blocks",
 		"---Styling---",
 		"utility-classes",
 		"theming",
