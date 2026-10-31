@@ -19,6 +19,18 @@ import { Tailwind, Document, Page, Block, Text } from "@ui-registry/pdf";
 </Tailwind>
 ```
 
+<Callout type="warn" title="Place the provider inside PDFViewer">
+`PDFViewer`, `PDFDownloadLink`, `BlobProvider`, `usePDF` and `pdf()` render the document in a separate React root, so React context does not cross them. A `<Tailwind>` placed around `<PDFViewer>` is ignored: place it inside, around `<Document>`.
+
+```tsx
+<PDFViewer>
+  <Tailwind theme={theme}>
+    <Document>...</Document>
+  </Tailwind>
+</PDFViewer>
+```
+</Callout>
+
 ## Light / Dark Mode
 
 @ui-registry/pdf does not detect or manage color schemes. The semantic tokens (like `primary`, `muted-foreground`, etc.) ship with light-theme defaults, but it's your app's responsibility to pass the right theme variables based on the current mode.

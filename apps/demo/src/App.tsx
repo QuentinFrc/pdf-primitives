@@ -155,11 +155,12 @@ function MyDocument() {
 export default function App() {
 	return (
 		<div style={{ height: "100vh" }}>
-			<Tailwind theme={theme}>
-				<PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
+			{/* PDFViewer renders in a separate React root: <Tailwind> must be inside it */}
+			<PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
+				<Tailwind theme={theme}>
 					<MyDocument />
-				</PDFViewer>
-			</Tailwind>
+				</Tailwind>
+			</PDFViewer>
 		</div>
 	);
 }
