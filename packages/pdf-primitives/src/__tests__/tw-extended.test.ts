@@ -507,3 +507,17 @@ describe("tw() — truncate", () => {
 		});
 	});
 });
+
+describe("tw() — flex factor", () => {
+	it("flex-3", () => {
+		expect(tw("flex-3")).toStrictEqual({ flex: 3 });
+	});
+
+	it("flex-[1.5]", () => {
+		expect(tw("flex-[1.5]")).toStrictEqual({ flex: 1.5 });
+	});
+
+	it("flex-row is unaffected", () => {
+		expect(tw("flex-row")).toStrictEqual({ flexDirection: "row" });
+	});
+});

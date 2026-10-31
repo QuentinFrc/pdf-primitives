@@ -6,9 +6,11 @@ afterEach(cleanup);
 // Mock @react-pdf/renderer — its components don't render in jsdom
 vi.mock(import("@react-pdf/renderer"), () => {
 	const make = (name: string) =>
-		React.forwardRef(({ style, wrap, render, ...rest }: any, ref: any) =>
-			React.createElement("div", {
+		React.forwardRef((allProps: any, ref: any) => {
+			const { style, wrap, render, ...rest } = allProps;
+			return React.createElement("div", {
 				ref,
+				"data-has-wrap": "wrap" in allProps ? "true" : undefined,
 				"data-testid": name,
 				"data-style": style ? JSON.stringify(style) : undefined,
 				"data-wrap": wrap !== undefined ? String(wrap) : undefined,
@@ -23,8 +25,8 @@ vi.mock(import("@react-pdf/renderer"), () => {
 						)
 					: undefined,
 				...rest,
-			}),
-		);
+			});
+		});
 
 	return {
 		Canvas: make("rp-canvas"),
@@ -141,9 +143,11 @@ describe(Block, () => {
 		expect(getByTestId("rp-view").dataset.wrap).toBe("true");
 	});
 
-	it("wrap is undefined when breakable is not set", () => {
+	it("does not pass a wrap prop when breakable is not set", () => {
+		// react-pdf checks `"wrap" in props`: wrap={undefined} would make the
+		// block unbreakable across pages
 		const { getByTestId } = render(<Block />);
-		expect(getByTestId("rp-view").dataset.wrap).toBeUndefined();
+		expect(getByTestId("rp-view").dataset.hasWrap).toBeUndefined();
 	});
 
 	it("renders children", () => {

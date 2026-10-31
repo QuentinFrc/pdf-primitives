@@ -876,7 +876,12 @@ function buildMatchers(t: ResolvedTheme): Parser[] {
 				shrink: { flexShrink: 1 },
 				"shrink-0": { flexShrink: 0 },
 			};
-			return map[cls] ?? null;
+			if (map[cls]) {
+				return map[cls];
+			}
+			// flex-2, flex-[1.5] → flex: n
+			const m = cls.match(/^flex-(?:(\d+)|\[(\d*\.?\d+)\])$/);
+			return m ? { flex: Number(m[1] ?? m[2]) } : null;
 		},
 
 		// ── Align / Justify ──

@@ -29,6 +29,11 @@ import { useStyles } from "./styles";
 import type { ThemeVars } from "./tailwind";
 import { Tailwind } from "./tailwind";
 
+// react-pdf checks `"wrap" in props`: an explicit `wrap={undefined}` makes the
+// node unbreakable, so only pass the prop when `breakable` is set.
+const wrapProp = (breakable?: boolean) =>
+	breakable === undefined ? {} : { wrap: breakable };
+
 // ─── Block (formerly View) ──────────────────────────────────────────────────
 
 export interface BlockProps extends Omit<RPViewProps, "style" | "wrap"> {
@@ -45,7 +50,7 @@ export const Block = ({
 	...props
 }: BlockProps) => {
 	const merged = useStyles(className, style);
-	return <RPView style={merged} wrap={breakable} {...props} />;
+	return <RPView style={merged} {...wrapProp(breakable)} {...props} />;
 };
 
 /** @deprecated Use `Block` instead */
@@ -75,7 +80,7 @@ export interface PageProps extends Omit<RPPageProps, "style" | "wrap"> {
 
 export const Page = ({ className, style, breakable, ...props }: PageProps) => {
 	const merged = useStyles(className, style);
-	return <RPPage style={merged} wrap={breakable} {...props} />;
+	return <RPPage style={merged} {...wrapProp(breakable)} {...props} />;
 };
 
 // ─── Image ───────────────────────────────────────────────────────────────────
