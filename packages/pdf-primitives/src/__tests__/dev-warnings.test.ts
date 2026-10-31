@@ -17,7 +17,7 @@ describe("dev warnings for unknown classes", () => {
 		const tw = createTw();
 		tw("totally-unknown-class-xyz");
 		expect(console.warn).toHaveBeenCalledWith(
-			'[@pdf-primitives/react] Unknown utility class: "totally-unknown-class-xyz"',
+			'[@ui-registry/pdf] Unknown utility class: "totally-unknown-class-xyz"',
 		);
 	});
 

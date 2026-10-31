@@ -10,7 +10,7 @@
 		"check-types": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@pdf-primitives/react": "workspace:*",
+		"@ui-registry/pdf": "workspace:*",
 		"@react-pdf/renderer": "^4.3.2",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0"

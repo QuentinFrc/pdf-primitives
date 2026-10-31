@@ -1,12 +1,5 @@
-import {
-	Document,
-	Link,
-	Page,
-	Tailwind,
-	Text,
-	View,
-} from "@pdf-primitives/react";
 import { Font, PDFViewer } from "@react-pdf/renderer";
+import { Document, Link, Page, Tailwind, Text, View } from "@ui-registry/pdf";
 
 Font.register({
 	family: "Inter",

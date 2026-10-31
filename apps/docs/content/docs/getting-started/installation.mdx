@@ -1,19 +1,19 @@
 ---
 title: Installation
-description: Install @pdf-primitives/react and configure your project.
+description: Install @ui-registry/pdf and configure your project.
 ---
 
 ## Install
 
 ```bash
-npm install @pdf-primitives/react react
+npm install @ui-registry/pdf react
 ```
 
 ## Exclude from Tailwind source detection
 
-@pdf-primitives/react uses the same class name conventions as Tailwind CSS but has its own independent styling engine. If your app uses Tailwind CSS, you should exclude your PDF files from Tailwind's content sources to avoid generating unnecessary CSS classes.
+@ui-registry/pdf uses the same class name conventions as Tailwind CSS but has its own independent styling engine. If your app uses Tailwind CSS, you should exclude your PDF files from Tailwind's content sources to avoid generating unnecessary CSS classes.
 
-In your `tailwind.config` (or `@source` directive in CSS), exclude the files that use @pdf-primitives/react:
+In your `tailwind.config` (or `@source` directive in CSS), exclude the files that use @ui-registry/pdf:
 
 ```ts title="tailwind.config.ts"
 export default {

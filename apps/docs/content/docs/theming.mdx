@@ -8,7 +8,7 @@ description: Customize colors, spacing, typography, and more with the Tailwind p
 Wrap your document tree in `<Tailwind>` to provide a tw engine to all components. Without it, components use the default theme.
 
 ```tsx
-import { Tailwind, Document, Page, Block, Text } from "@pdf-primitives/react";
+import { Tailwind, Document, Page, Block, Text } from "@ui-registry/pdf";
 
 <Tailwind>
   <Document>
@@ -21,7 +21,7 @@ import { Tailwind, Document, Page, Block, Text } from "@pdf-primitives/react";
 
 ## Light / Dark Mode
 
-@pdf-primitives/react does not detect or manage color schemes. The semantic tokens (like `primary`, `muted-foreground`, etc.) ship with light-theme defaults, but it's your app's responsibility to pass the right theme variables based on the current mode.
+@ui-registry/pdf does not detect or manage color schemes. The semantic tokens (like `primary`, `muted-foreground`, etc.) ship with light-theme defaults, but it's your app's responsibility to pass the right theme variables based on the current mode.
 
 ```tsx
 const lightTheme = {
@@ -203,7 +203,7 @@ Available wildcards:
 Access the current tw engine inside custom components:
 
 ```tsx
-import { useTw } from "@pdf-primitives/react";
+import { useTw } from "@ui-registry/pdf";
 
 function Badge({ label, variant }: { label: string; variant: "default" | "destructive" }) {
   const tw = useTw();
@@ -228,10 +228,10 @@ The hook returns the themed `tw` function from the nearest `<Tailwind>` provider
 Use the tw engine outside of React components:
 
 ```ts
-import { createTw, tw, resolveTheme } from "@pdf-primitives/react";
+import { createTw, tw, resolveTheme } from "@ui-registry/pdf";
 ```
 
-> A dedicated `@pdf-primitives/react/tw` subpath is also available if you need the tw engine without any React dependency (e.g. in a Node script or worker).
+> A dedicated `@ui-registry/pdf/tw` subpath is also available if you need the tw engine without any React dependency (e.g. in a Node script or worker).
 
 ### createTw(vars?)
 
@@ -253,7 +253,7 @@ const styles = tw("p-4 bg-brand text-tiny");
 Pre-created tw function with the default theme:
 
 ```ts
-import { tw } from "@pdf-primitives/react";
+import { tw } from "@ui-registry/pdf";
 
 const styles = tw("flex flex-row gap-2 p-4");
 ```

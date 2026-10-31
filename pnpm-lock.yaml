@@ -32,12 +32,12 @@ importers:
 
   apps/demo:
     dependencies:
-      '@pdf-primitives/react':
-        specifier: workspace:*
-        version: link:../../packages/pdf-primitives
       '@react-pdf/renderer':
         specifier: ^4.3.2
         version: 4.3.2(react@19.2.4)
+      '@ui-registry/pdf':
+        specifier: workspace:*
+        version: link:../../packages/pdf-primitives
       react:
         specifier: ^19.2.0
         version: 19.2.4
