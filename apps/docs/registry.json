@@ -1,7 +1,7 @@
 {
 	"$schema": "https://ui.shadcn.com/schema/registry.json",
 	"name": "ui-registry-pdf",
-	"homepage": "https://pdf-primitives.vercel.app",
+	"homepage": "https://ui-registry.com",
 	"items": [
 		{
 			"name": "heading",
@@ -94,11 +94,11 @@
 			"description": "Multi-page invoice with line items, taxes, totals and localized amounts.",
 			"dependencies": ["@ui-registry/pdf"],
 			"registryDependencies": [
-				"https://pdf-primitives.vercel.app/r/badge.json",
-				"https://pdf-primitives.vercel.app/r/heading.json",
-				"https://pdf-primitives.vercel.app/r/page-footer.json",
-				"https://pdf-primitives.vercel.app/r/separator.json",
-				"https://pdf-primitives.vercel.app/r/table.json"
+				"https://ui-registry.com/r/pdf/badge.json",
+				"https://ui-registry.com/r/pdf/heading.json",
+				"https://ui-registry.com/r/pdf/page-footer.json",
+				"https://ui-registry.com/r/pdf/separator.json",
+				"https://ui-registry.com/r/pdf/table.json"
 			],
 			"files": [
 				{

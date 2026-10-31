@@ -6,7 +6,7 @@
 		"dev": "next dev",
 		"build": "pnpm registry:build && next build",
 		"start": "next start",
-		"registry:build": "shadcn build -o public/r"
+		"registry:build": "shadcn build -o public/r/pdf"
 	},
 	"dependencies": {
 		"@react-pdf/renderer": "^4.3.2",

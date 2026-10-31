@@ -13,10 +13,28 @@ The registry works like [shadcn/ui](https://ui.shadcn.com), for PDFs. Components
 Your project needs a `components.json` (created by `npx shadcn init`). Then add any item by URL:
 
 ```bash
-npx shadcn add https://pdf-primitives.vercel.app/r/invoice.json
+npx shadcn add https://ui-registry.com/r/pdf/invoice.json
 ```
 
 The CLI installs `@ui-registry/pdf` and the components the item depends on.
+
+### With a namespace
+
+Register the namespace once in your `components.json`:
+
+```json title="components.json"
+{
+  "registries": {
+    "@ui-registry-pdf": "https://ui-registry.com/r/pdf/{name}.json"
+  }
+}
+```
+
+Then add items by name:
+
+```bash
+npx shadcn add @ui-registry-pdf/invoice @ui-registry-pdf/table
+```
 
 ## Where files go
 
