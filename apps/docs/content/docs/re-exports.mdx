@@ -3,10 +3,10 @@ title: Re-exports
 description: PDF generation utilities and viewer components.
 ---
 
-These utilities are included in @ui-registry/pdf for convenience so you can import everything from a single package.
+These utilities are included in @ui-registries/pdf for convenience so you can import everything from a single package.
 
 ```ts
-import { StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@ui-registry/pdf";
+import { StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@ui-registries/pdf";
 ```
 
 For font registration, see [`defineFont()`](/docs/fonts) — the recommended API. The raw `Font` object from react-pdf is also available as `Font` if needed.
@@ -79,7 +79,7 @@ const buffer = await pdf(<MyDocument />).toBuffer();
 Node-only helpers for server-side generation (route handlers, scripts, jobs).
 
 ```ts title="app/invoice/route.ts"
-import { renderToBuffer } from "@ui-registry/pdf";
+import { renderToBuffer } from "@ui-registries/pdf";
 
 export async function GET() {
   const buffer = await renderToBuffer(<Invoice />);

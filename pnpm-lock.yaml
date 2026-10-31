@@ -35,7 +35,7 @@ importers:
       '@react-pdf/renderer':
         specifier: ^4.3.2
         version: 4.3.2(react@19.2.4)
-      '@ui-registry/pdf':
+      '@ui-registries/pdf':
         specifier: workspace:*
         version: link:../../packages/pdf-primitives
       react:
@@ -69,7 +69,7 @@ importers:
       '@types/mdx':
         specifier: ^2
         version: 2.0.13
-      '@ui-registry/pdf':
+      '@ui-registries/pdf':
         specifier: workspace:*
         version: link:../../packages/pdf-primitives
       fumadocs-core:

@@ -8,7 +8,7 @@
 			"type": "registry:ui",
 			"title": "Heading",
 			"description": "Document headings (levels 1\u20134).",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"files": [
 				{
 					"path": "registry/pdf/heading.tsx",
@@ -22,7 +22,7 @@
 			"type": "registry:ui",
 			"title": "Separator",
 			"description": "Horizontal or vertical divider.",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"files": [
 				{
 					"path": "registry/pdf/separator.tsx",
@@ -36,7 +36,7 @@
 			"type": "registry:ui",
 			"title": "Badge",
 			"description": "Small status label with default, secondary, destructive and outline variants.",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"files": [
 				{
 					"path": "registry/pdf/badge.tsx",
@@ -50,7 +50,7 @@
 			"type": "registry:ui",
 			"title": "Card",
 			"description": "Bordered container with header, title, description, content and footer.",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"files": [
 				{
 					"path": "registry/pdf/card.tsx",
@@ -64,7 +64,7 @@
 			"type": "registry:ui",
 			"title": "Table",
 			"description": "Table with a header that repeats on every page and rows that never split across pages.",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"files": [
 				{
 					"path": "registry/pdf/table.tsx",
@@ -78,7 +78,7 @@
 			"type": "registry:ui",
 			"title": "Page Footer",
 			"description": "Footer fixed on every page, with page numbers.",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"files": [
 				{
 					"path": "registry/pdf/page-footer.tsx",
@@ -92,7 +92,7 @@
 			"type": "registry:block",
 			"title": "Invoice",
 			"description": "Multi-page invoice with line items, taxes, totals and localized amounts.",
-			"dependencies": ["@ui-registry/pdf"],
+			"dependencies": ["@ui-registries/pdf"],
 			"registryDependencies": [
 				"https://ui-registry.com/r/pdf/badge.json",
 				"https://ui-registry.com/r/pdf/heading.json",

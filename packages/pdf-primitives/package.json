@@ -1,5 +1,5 @@
 {
-	"name": "@ui-registry/pdf",
+	"name": "@ui-registries/pdf",
 	"version": "0.0.1",
 	"description": "React primitives for PDF generation with react-pdf",
 	"keywords": [

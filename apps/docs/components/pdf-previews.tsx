@@ -1,4 +1,4 @@
-import { Block, Document, Page, Text } from "@ui-registry/pdf";
+import { Block, Document, Page, Text } from "@ui-registries/pdf";
 import type React from "react";
 
 import { Badge } from "@/registry/pdf/badge";

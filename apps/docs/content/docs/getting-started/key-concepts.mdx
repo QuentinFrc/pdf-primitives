@@ -1,6 +1,6 @@
 ---
 title: Key Concepts
-description: Core concepts behind @ui-registry/pdf.
+description: Core concepts behind @ui-registries/pdf.
 ---
 
 ## className prop
@@ -34,7 +34,7 @@ Under the hood, a lightweight Tailwind-to-style parser converts class strings to
 You can also use the engine standalone:
 
 ```ts
-import { createTw } from "@ui-registry/pdf";
+import { createTw } from "@ui-registries/pdf";
 
 const tw = createTw({ "--color-brand": "#0073e6" });
 const styles = tw("p-4 bg-brand text-white font-bold");
@@ -45,7 +45,7 @@ const styles = tw("p-4 bg-brand text-white font-bold");
 
 In a standard web app, Tailwind uses `rem` as the base unit (1rem = 16px). PDF documents use a different unit: **points (pt)**, where 1in = 72pt.
 
-@ui-registry/pdf automatically converts the Tailwind scale to points:
+@ui-registries/pdf automatically converts the Tailwind scale to points:
 
 - 1 Tailwind unit = 4px = **3pt**
 - `p-4` → 12pt padding (not 1rem)

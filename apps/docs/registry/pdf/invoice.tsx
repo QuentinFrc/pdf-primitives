@@ -1,5 +1,5 @@
-import type { ThemeVars } from "@ui-registry/pdf";
-import { Block, Document, Page, Text } from "@ui-registry/pdf";
+import type { ThemeVars } from "@ui-registries/pdf";
+import { Block, Document, Page, Text } from "@ui-registries/pdf";
 
 import { Badge } from "./badge";
 import { Heading } from "./heading";

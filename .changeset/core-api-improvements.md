@@ -1,5 +1,5 @@
 ---
-"@ui-registry/pdf": minor
+"@ui-registries/pdf": minor
 ---
 
 Core API improvements:

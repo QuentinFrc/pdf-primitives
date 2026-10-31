@@ -1,5 +1,5 @@
-import type { BlockProps } from "@ui-registry/pdf";
-import { Block, cn } from "@ui-registry/pdf";
+import type { BlockProps } from "@ui-registries/pdf";
+import { Block, cn } from "@ui-registries/pdf";
 
 export interface SeparatorProps extends BlockProps {
 	orientation?: "horizontal" | "vertical";

@@ -1,6 +1,6 @@
 "use client";
 
-import { PDFViewer } from "@ui-registry/pdf";
+import { PDFViewer } from "@ui-registries/pdf";
 
 import type { PreviewName } from "./pdf-previews";
 import { previews } from "./pdf-previews";

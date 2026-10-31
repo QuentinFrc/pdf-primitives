@@ -40,7 +40,7 @@ import { Invoice } from "@/components/pdf/invoice";
 ### Generate it on the server
 
 ```tsx title="app/invoices/[id]/route.tsx"
-import { renderToBuffer } from "@ui-registry/pdf";
+import { renderToBuffer } from "@ui-registries/pdf";
 import { Invoice } from "@/components/pdf/invoice";
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {

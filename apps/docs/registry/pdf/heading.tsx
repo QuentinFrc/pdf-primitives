@@ -1,5 +1,5 @@
-import type { TextProps } from "@ui-registry/pdf";
-import { cn, Text } from "@ui-registry/pdf";
+import type { TextProps } from "@ui-registries/pdf";
+import { cn, Text } from "@ui-registries/pdf";
 
 const levels = {
 	1: "text-3xl font-bold tracking-tight",

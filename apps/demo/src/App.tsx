@@ -6,7 +6,7 @@ import {
 	PDFViewer,
 	Text,
 	View,
-} from "@ui-registry/pdf";
+} from "@ui-registries/pdf";
 
 Font.register({
 	family: "Inter",

@@ -1714,7 +1714,7 @@ export function createTw(vars?: ThemeVars): TwFn {
 			!warned.has(cls)
 		) {
 			warned.add(cls);
-			console.warn(`[@ui-registry/pdf] Unknown utility class: "${cls}"`);
+			console.warn(`[@ui-registries/pdf] Unknown utility class: "${cls}"`);
 		}
 		return {};
 	}

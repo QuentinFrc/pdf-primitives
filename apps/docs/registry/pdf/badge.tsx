@@ -1,5 +1,5 @@
-import type { BlockProps } from "@ui-registry/pdf";
-import { Block, cn, Text } from "@ui-registry/pdf";
+import type { BlockProps } from "@ui-registries/pdf";
+import { Block, cn, Text } from "@ui-registries/pdf";
 
 const variants = {
 	default: "bg-primary text-primary-foreground",

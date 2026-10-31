@@ -1,5 +1,5 @@
-import type { BlockProps, PageNumberProps } from "@ui-registry/pdf";
-import { Block, cn, PageNumber, Text } from "@ui-registry/pdf";
+import type { BlockProps, PageNumberProps } from "@ui-registries/pdf";
+import { Block, cn, PageNumber, Text } from "@ui-registries/pdf";
 
 export interface PageFooterProps extends BlockProps {
 	/** Custom page number format. Defaults to "1 / 3". */

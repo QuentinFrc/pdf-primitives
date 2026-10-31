@@ -11,7 +11,7 @@
 	"dependencies": {
 		"@react-pdf/renderer": "^4.3.2",
 		"@types/mdx": "^2",
-		"@ui-registry/pdf": "workspace:*",
+		"@ui-registries/pdf": "workspace:*",
 		"fumadocs-core": "16.6.10",
 		"fumadocs-mdx": "14.2.9",
 		"fumadocs-typescript": "^5.1.5",

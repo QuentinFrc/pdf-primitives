@@ -1,5 +1,5 @@
-import type { BlockProps } from "@ui-registry/pdf";
-import { Block, cn, Text } from "@ui-registry/pdf";
+import type { BlockProps } from "@ui-registries/pdf";
+import { Block, cn, Text } from "@ui-registries/pdf";
 import type React from "react";
 
 // Strings and numbers need a <Text> in react-pdf; text styles set on the

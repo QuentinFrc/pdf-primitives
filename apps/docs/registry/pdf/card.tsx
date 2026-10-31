@@ -1,5 +1,5 @@
-import type { BlockProps, TextProps } from "@ui-registry/pdf";
-import { Block, cn, Text } from "@ui-registry/pdf";
+import type { BlockProps, TextProps } from "@ui-registries/pdf";
+import { Block, cn, Text } from "@ui-registries/pdf";
 
 export const Card = ({ className, ...props }: BlockProps) => (
 	<Block

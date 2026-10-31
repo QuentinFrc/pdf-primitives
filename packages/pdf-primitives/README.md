@@ -1,11 +1,11 @@
-# @ui-registry/pdf
+# @ui-registries/pdf
 
 Tailwind-style `className` support for `@react-pdf/renderer`. A standalone wrapper — you never need to import `@react-pdf/renderer` directly.
 
 ## Install
 
 ```bash
-npm install @ui-registry/pdf @react-pdf/renderer react
+npm install @ui-registries/pdf @react-pdf/renderer react
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ import {
   Link,
   Tailwind,
   cn,
-} from "@ui-registry/pdf";
+} from "@ui-registries/pdf";
 
 function MyPDF() {
   return (
@@ -45,7 +45,7 @@ function MyPDF() {
 ### Standalone `tw` engine
 
 ```ts
-import { createTw } from "@ui-registry/pdf/tw";
+import { createTw } from "@ui-registries/pdf/tw";
 
 const tw = createTw({ "--color-brand": "#0073e6" });
 tw("p-4 bg-brand text-white");
