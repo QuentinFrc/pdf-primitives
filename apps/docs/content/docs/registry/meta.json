@@ -1,0 +1,12 @@
+{
+	"title": "Registry",
+	"pages": [
+		"index",
+		"heading",
+		"separator",
+		"badge",
+		"card",
+		"table",
+		"page-footer"
+	]
+}

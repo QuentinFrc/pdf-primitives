@@ -302,8 +302,8 @@ describe("tw() — default theme", () => {
 		expect(tw("leading-relaxed")).toStrictEqual({ lineHeight: 1.625 });
 	});
 
-	it("leading-2 → numeric", () => {
-		expect(tw("leading-2")).toStrictEqual({ lineHeight: 2 });
+	it("leading-2 → absolute (spacing scale, like Tailwind v4)", () => {
+		expect(tw("leading-2")).toStrictEqual({ lineHeight: "6pt" });
 	});
 
 	// ── Letter spacing ──

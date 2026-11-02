@@ -5,6 +5,10 @@ export {
 	PDFDownloadLink,
 	PDFViewer,
 	pdf,
+	renderToBuffer,
+	renderToFile,
+	renderToStream,
+	renderToString,
 	StyleSheet,
 	usePDF,
 } from "@react-pdf/renderer";

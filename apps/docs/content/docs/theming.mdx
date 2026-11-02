@@ -3,25 +3,37 @@ title: Theming
 description: Customize colors, spacing, typography, and more with the Tailwind provider.
 ---
 
-## Tailwind Provider
+## Document theme
 
-Wrap your document tree in `<Tailwind>` to provide a tw engine to all components. Without it, components use the default theme.
+Pass your theme variables to `<Document theme>`. Without a theme, components use the defaults.
 
 ```tsx
-import { Tailwind, Document, Page, Block, Text } from "@pdf-primitives/react";
+import { Document, Page, Text } from "@ui-registries/pdf";
 
-<Tailwind>
-  <Document>
-    <Page className="p-12">
-      <Text className="text-primary">Uses default theme</Text>
-    </Page>
-  </Document>
-</Tailwind>
+<Document theme={{ "--color-primary": "#0073e6" }}>
+  <Page className="p-12">
+    <Text className="text-primary">Uses the custom theme</Text>
+  </Page>
+</Document>
 ```
+
+## Tailwind Provider
+
+`<Tailwind theme>` does the same thing as a standalone provider, for example to theme only part of a document.
+
+<Callout type="warn" title="Keep the theme inside PDFViewer">
+`PDFViewer`, `PDFDownloadLink`, `BlobProvider`, `usePDF` and `pdf()` render the document in a separate React root, so React context does not cross them. A `<Tailwind>` placed around `<PDFViewer>` is ignored. `<Document theme>` avoids the problem entirely.
+
+```tsx
+<PDFViewer>
+  <Document theme={theme}>...</Document>
+</PDFViewer>
+```
+</Callout>
 
 ## Light / Dark Mode
 
-@pdf-primitives/react does not detect or manage color schemes. The semantic tokens (like `primary`, `muted-foreground`, etc.) ship with light-theme defaults, but it's your app's responsibility to pass the right theme variables based on the current mode.
+@ui-registries/pdf does not detect or manage color schemes. The semantic tokens (like `primary`, `muted-foreground`, etc.) ship with light-theme defaults, but it's your app's responsibility to pass the right theme variables based on the current mode.
 
 ```tsx
 const lightTheme = {
@@ -203,7 +215,7 @@ Available wildcards:
 Access the current tw engine inside custom components:
 
 ```tsx
-import { useTw } from "@pdf-primitives/react";
+import { useTw } from "@ui-registries/pdf";
 
 function Badge({ label, variant }: { label: string; variant: "default" | "destructive" }) {
   const tw = useTw();
@@ -228,10 +240,10 @@ The hook returns the themed `tw` function from the nearest `<Tailwind>` provider
 Use the tw engine outside of React components:
 
 ```ts
-import { createTw, tw, resolveTheme } from "@pdf-primitives/react";
+import { createTw, tw, resolveTheme } from "@ui-registries/pdf";
 ```
 
-> A dedicated `@pdf-primitives/react/tw` subpath is also available if you need the tw engine without any React dependency (e.g. in a Node script or worker).
+> A dedicated `@ui-registries/pdf/tw` subpath is also available if you need the tw engine without any React dependency (e.g. in a Node script or worker).
 
 ### createTw(vars?)
 
@@ -253,7 +265,7 @@ const styles = tw("p-4 bg-brand text-tiny");
 Pre-created tw function with the default theme:
 
 ```ts
-import { tw } from "@pdf-primitives/react";
+import { tw } from "@ui-registries/pdf";
 
 const styles = tw("flex flex-row gap-2 p-4");
 ```

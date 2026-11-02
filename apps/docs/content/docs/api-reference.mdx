@@ -1,6 +1,6 @@
 ---
 title: API Reference
-description: Complete reference of all exports from @pdf-primitives/react.
+description: Complete reference of all exports from @ui-registries/pdf.
 ---
 
 ## Components
@@ -94,7 +94,7 @@ const styles = tw("p-4 bg-brand");
 Pre-created `TwFn` instance with the default theme. Equivalent to `createTw()`.
 
 ```ts
-import { tw } from "@pdf-primitives/react";
+import { tw } from "@ui-registries/pdf";
 const styles = tw("flex flex-row gap-2 p-4");
 ```
 
@@ -184,17 +184,17 @@ These are passed through directly from `@react-pdf/renderer`:
 
 | Type | For |
 |------|-----|
-| `PDFBlockProps` | `Block` |
-| `PDFTextProps` | `Text` |
-| `PDFPageProps` | `Page` |
-| `PDFImageProps` | `Image` |
-| `PDFLinkProps` | `Link` |
-| `PDFCanvasProps` | `Canvas` |
-| `PDFNoteProps` | `Note` |
-| `PDFPageNumberProps` | `PageNumber` |
-| `PDFSvgProps` | `Svg` |
-| `PDFGProps` | `G` |
-| `PDFSvgTextProps` | `SvgText` |
+| `BlockProps` | `Block` |
+| `TextProps` | `Text` |
+| `PageProps` | `Page` |
+| `ImageProps` | `Image` |
+| `LinkProps` | `Link` |
+| `CanvasProps` | `Canvas` |
+| `NoteProps` | `Note` |
+| `PageNumberProps` | `PageNumber` |
+| `SvgProps` | `Svg` |
+| `GProps` | `G` |
+| `SvgTextProps` | `SvgText` |
 
 ### Engine Types
 
@@ -222,22 +222,22 @@ interface ResolvedTheme {
 
 ## Subpath Exports
 
-### `@pdf-primitives/react/tw`
+### `@ui-registries/pdf/tw`
 
 Standalone tw engine without any React dependency. Use this in Node scripts, workers, or non-React contexts.
 
 ```ts
-import { createTw, tw, resolveTheme } from "@pdf-primitives/react/tw";
+import { createTw, tw, resolveTheme } from "@ui-registries/pdf/tw";
 ```
 
 Exports: `createTw`, `tw`, `resolveTheme`, and all engine types.
 
-### `@pdf-primitives/react/font`
+### `@ui-registries/pdf/font`
 
 Standalone font registration without React. Use in build scripts or non-React contexts.
 
 ```ts
-import { defineFont } from "@pdf-primitives/react/font";
+import { defineFont } from "@ui-registries/pdf/font";
 ```
 
 Exports: `defineFont`, and font types (`DefineFontOptions`, `FontVariant`, `FontResult`).

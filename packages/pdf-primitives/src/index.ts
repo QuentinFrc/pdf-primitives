@@ -2,14 +2,15 @@ export { cn } from "./cn";
 export type { DefineFontOptions, FontResult, FontVariant } from "./font";
 export { defineFont } from "./font";
 export type {
-	PDFBlockProps,
-	PDFCanvasProps,
-	PDFImageProps,
-	PDFLinkProps,
-	PDFNoteProps,
-	PDFPageNumberProps,
-	PDFPageProps,
-	PDFTextProps,
+	BlockProps,
+	CanvasProps,
+	DocumentProps,
+	ImageProps,
+	LinkProps,
+	NoteProps,
+	PageNumberProps,
+	PageProps,
+	TextProps,
 } from "./primitives";
 export {
 	Block,
@@ -29,10 +30,15 @@ export {
 	PDFDownloadLink,
 	PDFViewer,
 	pdf,
+	renderToBuffer,
+	renderToFile,
+	renderToStream,
+	renderToString,
 	StyleSheet,
 	usePDF,
 } from "./re-exports";
-export type { PDFGProps, PDFSvgProps, PDFSvgTextProps } from "./svg";
+export type { Style } from "./styles";
+export type { GProps, SvgProps, SvgTextProps } from "./svg";
 export {
 	Circle,
 	ClipPath,

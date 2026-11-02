@@ -1,5 +1,5 @@
 {
-	"name": "@pdf-primitives/react",
+	"name": "@ui-registries/pdf",
 	"version": "0.0.1",
 	"description": "React primitives for PDF generation with react-pdf",
 	"keywords": [
@@ -9,7 +9,7 @@
 		"react-pdf",
 		"tailwind"
 	],
-	"homepage": "https://pdf-primitives.vercel.app",
+	"homepage": "https://ui-registry.com",
 	"bugs": "https://github.com/QuentinFrc/pdf-primitives/issues",
 	"license": "MIT",
 	"author": "Quentin",

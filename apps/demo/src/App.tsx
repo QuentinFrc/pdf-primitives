@@ -1,12 +1,12 @@
 import {
 	Document,
+	Font,
 	Link,
 	Page,
-	Tailwind,
+	PDFViewer,
 	Text,
 	View,
-} from "@pdf-primitives/react";
-import { Font, PDFViewer } from "@react-pdf/renderer";
+} from "@ui-registries/pdf";
 
 Font.register({
 	family: "Inter",
@@ -37,7 +37,7 @@ const theme = {
 
 function MyDocument() {
 	return (
-		<Document>
+		<Document theme={theme}>
 			<Page className="p-10 bg-white" style={{ fontFamily: "Inter" }}>
 				<Text className="text-3xl font-bold text-foreground mb-2">
 					pdf-primitives
@@ -162,11 +162,9 @@ function MyDocument() {
 export default function App() {
 	return (
 		<div style={{ height: "100vh" }}>
-			<Tailwind theme={theme}>
-				<PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
-					<MyDocument />
-				</PDFViewer>
-			</Tailwind>
+			<PDFViewer style={{ width: "100%", height: "100%", border: "none" }}>
+				<MyDocument />
+			</PDFViewer>
 		</div>
 	);
 }

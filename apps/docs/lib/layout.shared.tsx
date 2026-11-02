@@ -38,7 +38,7 @@ export const baseOptions = (): BaseLayoutProps => ({
 					<rect x="178" y="286" width="34" height="6" rx="3" fill="#171717" />
 					<rect x="246" y="258" width="92" height="44" rx="10" fill="#F04E63" />
 				</svg>
-				@pdf-primitives/react
+				@ui-registries/pdf
 			</>
 		),
 	},

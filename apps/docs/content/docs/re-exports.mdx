@@ -3,10 +3,10 @@ title: Re-exports
 description: PDF generation utilities and viewer components.
 ---
 
-These utilities are included in @pdf-primitives/react for convenience so you can import everything from a single package.
+These utilities are included in @ui-registries/pdf for convenience so you can import everything from a single package.
 
 ```ts
-import { StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@pdf-primitives/react";
+import { StyleSheet, PDFViewer, PDFDownloadLink, BlobProvider, usePDF, pdf } from "@ui-registries/pdf";
 ```
 
 For font registration, see [`defineFont()`](/docs/fonts) — the recommended API. The raw `Font` object from react-pdf is also available as `Font` if needed.
@@ -73,3 +73,20 @@ Generate a PDF blob outside of React (e.g. in a server endpoint or script).
 const blob = await pdf(<MyDocument />).toBlob();
 const buffer = await pdf(<MyDocument />).toBuffer();
 ```
+
+## renderToBuffer / renderToStream / renderToFile
+
+Node-only helpers for server-side generation (route handlers, scripts, jobs).
+
+```ts title="app/invoice/route.ts"
+import { renderToBuffer } from "@ui-registries/pdf";
+
+export async function GET() {
+  const buffer = await renderToBuffer(<Invoice />);
+  return new Response(buffer, {
+    headers: { "Content-Type": "application/pdf" },
+  });
+}
+```
+
+`renderToStream(<Doc />)` returns a Node readable stream; `renderToFile(<Doc />, "out.pdf")` writes to disk.
